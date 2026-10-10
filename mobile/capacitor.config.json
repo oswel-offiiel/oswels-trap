@@ -1,0 +1,14 @@
+{
+  "appId": "officiel.oswel.trap",
+  "appName": "Oswel's Trap",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#120d0b"
+  }
+}

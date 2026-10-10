@@ -1,0 +1,4 @@
+OSWEL'S TRAP 1.5 — validation des niveaux
+VALIDÉ  2-10 coop  longueur=251 zone=3/3   chutes=  4 temps=  77.0s pièces=4/7    
+VALIDÉ  4-4 coop   longueur=256 zone=4/4   chutes=  0 temps=  51.7s pièces=4/10   
+Terminé en 48 s — TOUT EST VALIDÉ ✓

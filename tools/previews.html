@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Aperçus des mondes</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<body style="background:#111;color:#eee;font-family:sans-serif">
+<p>Outil : fabrique les images img/monde-1.jpg … monde-5.jpg (utilisé par le développeur).</p>
+<div id="out"></div>
+<script src="../js/three.min.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/models.js"></script>
+<script src="../js/previews.js"></script>
+<script>
+  window.renderAll = async function () {
+    await document.fonts.ready;
+    const res = {};
+    for (let i = 1; i <= 5; i++) {
+      res[i] = OT.renderWorldPreview(i, 800, 1000);
+      const im = new Image(); im.src = res[i]; im.width = 160; document.getElementById('out').appendChild(im);
+    }
+    return res;
+  };
+</script>
+</body>

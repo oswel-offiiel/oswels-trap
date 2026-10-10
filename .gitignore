@@ -1,0 +1,13 @@
+# fichiers fabriqués (on les refait avec npm / les scripts)
+node_modules/
+bureau/dist/
+bureau/jeu/
+mobile/www/
+mobile/android/app/src/main/assets/public/
+mobile/android/app/build/
+mobile/android/.gradle/
+*.log
+
+# caches des outils (refaits automatiquement)
+tools/voix/durees.json
+__pycache__/

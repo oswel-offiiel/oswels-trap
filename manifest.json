@@ -1,0 +1,17 @@
+{
+  "name": "Oswel's Trap",
+  "short_name": "Oswel's Trap",
+  "description": "Jeu de plateforme piégé de 1 à 4 joueurs : l'histoire d'Oswel en 5 mondes et un mode multijoueur entre amis.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#120d0b",
+  "theme_color": "#120d0b",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

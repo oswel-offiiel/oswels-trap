@@ -1,0 +1,62 @@
+OK  Boum !                   4 bots Normal      140 s   1. Bot 1 (normal) 4 · 2. Bot 2 (normal) 3 · 2. Bot 3 (normal) 3 · 4. Bot 4 (normal) 0
+OK  Boum !                   4 bots Normal      280 s   1. Bot 4 (normal) 9 · 2. Bot 1 (normal) 3 · 3. Bot 2 (normal) 0 · 3. Bot 3 (normal) 0
+OK  Boum !                   niveaux mélangés   230 s   1. Bot 4 (chaos) 4 · 2. Bot 1 (facile) 3 · 2. Bot 3 (difficile) 3 · 4. Bot 2 (normal) 0
+OK  Boum !                   niveaux mélangés   210 s   1. Bot 3 (difficile) 6 · 2. Bot 1 (facile) 5 · 3. Bot 4 (chaos) 4 · 4. Bot 2 (normal) 1
+OK  Boum !                   duel à 2           210 s   1. Bot 1 (normal) 6 · 2. Bot 2 (normal) 3
+OK  Boum !                   duel à 2           160 s   1. Bot 1 (normal) 7 · 2. Bot 2 (normal) 4
+OK  Patate chaude            4 bots Normal      180 s   1. Bot 1 (normal) 7 · 2. Bot 3 (normal) 5 · 3. Bot 4 (normal) 3 · 4. Bot 2 (normal) 3
+OK  Patate chaude            4 bots Normal      160 s   1. Bot 2 (normal) 6 · 2. Bot 1 (normal) 6 · 3. Bot 3 (normal) 4 · 4. Bot 4 (normal) 2
+OK  Patate chaude            niveaux mélangés   200 s   1. Bot 4 (chaos) 7 · 2. Bot 3 (difficile) 6 · 3. Bot 2 (normal) 3 · 4. Bot 1 (facile) 2
+OK  Patate chaude            niveaux mélangés   180 s   1. Bot 4 (chaos) 8 · 2. Bot 3 (difficile) 5 · 3. Bot 2 (normal) 4 · 4. Bot 1 (facile) 1
+OK  Patate chaude            duel à 2            90 s   1. Bot 2 (normal) 8 · 2. Bot 1 (normal) 7
+OK  Patate chaude            duel à 2            70 s   1. Bot 2 (normal) 9 · 2. Bot 1 (normal) 6
+OK  Vole-moi ça !            4 bots Normal      130 s   1. Bot 3 (normal) 93 · 2. Bot 1 (normal) 72 · 3. Bot 4 (normal) 55 · 4. Bot 2 (normal) 47
+OK  Vole-moi ça !            4 bots Normal      130 s   1. Bot 2 (normal) 89 · 2. Bot 1 (normal) 70 · 3. Bot 4 (normal) 66 · 4. Bot 3 (normal) 51
+OK  Vole-moi ça !            niveaux mélangés   130 s   1. Bot 2 (normal) 85 · 2. Bot 1 (facile) 70 · 3. Bot 4 (chaos) 64 · 4. Bot 3 (difficile) 61
+OK  Vole-moi ça !            niveaux mélangés   130 s   1. Bot 3 (difficile) 76 · 2. Bot 2 (normal) 74 · 3. Bot 1 (facile) 61 · 4. Bot 4 (chaos) 44
+OK  Vole-moi ça !            duel à 2           130 s   1. Bot 1 (normal) 129 · 2. Bot 2 (normal) 94
+OK  Vole-moi ça !            duel à 2           130 s   1. Bot 1 (normal) 107 · 2. Bot 2 (normal) 100
+OK  Le Trésor                4 bots Normal      160 s   1. Bot 4 (normal) 79 · 2. Bot 1 (normal) 61 · 3. Bot 3 (normal) 42 · 4. Bot 2 (normal) 35
+OK  Le Trésor                4 bots Normal      160 s   1. Bot 2 (normal) 75 · 2. Bot 3 (normal) 59 · 3. Bot 1 (normal) 46 · 3. Bot 4 (normal) 46
+OK  Le Trésor                niveaux mélangés   160 s   1. Bot 3 (difficile) 106 · 2. Bot 4 (chaos) 64 · 3. Bot 2 (normal) 58 · 4. Bot 1 (facile) 20
+OK  Le Trésor                niveaux mélangés   160 s   1. Bot 3 (difficile) 126 · 2. Bot 4 (chaos) 66 · 3. Bot 2 (normal) 34 · 4. Bot 1 (facile) 20
+OK  Le Trésor                duel à 2           160 s   1. Bot 2 (normal) 118 · 2. Bot 1 (normal) 115
+OK  Le Trésor                duel à 2           160 s   1. Bot 1 (normal) 130 · 2. Bot 2 (normal) 94
+OK  Le Train de la mort      4 bots Normal      220 s   1. Bot 4 (normal) 8 · 2. Bot 1 (normal) 5 · 3. Bot 3 (normal) 2 · 4. Bot 2 (normal) 1
+OK  Le Train de la mort      4 bots Normal      210 s   1. Bot 3 (normal) 12 · 2. Bot 1 (normal) 2 · 3. Bot 2 (normal) 1 · 4. Bot 4 (normal) 0
+OK  Le Train de la mort      niveaux mélangés   240 s   1. Bot 4 (chaos) 6 · 2. Bot 2 (normal) 5 · 3. Bot 1 (facile) 3 · 4. Bot 3 (difficile) 1
+OK  Le Train de la mort      niveaux mélangés   330 s   1. Bot 2 (normal) 6 · 1. Bot 4 (chaos) 6 · 3. Bot 3 (difficile) 5 · 4. Bot 1 (facile) 0
+OK  Le Train de la mort      duel à 2           290 s   1. Bot 2 (normal) 7 · 2. Bot 1 (normal) 4
+OK  Le Train de la mort      duel à 2           320 s   1. Bot 2 (normal) 8 · 2. Bot 1 (normal) 4
+OK  Chaos magnétique         4 bots Normal      160 s   1. Bot 3 (normal) 7 · 2. Bot 1 (normal) 3 · 3. Bot 2 (normal) 0 · 4. Bot 4 (normal) 0
+OK  Chaos magnétique         4 bots Normal      160 s   1. Bot 2 (normal) 7 · 2. Bot 4 (normal) 3 · 3. Bot 3 (normal) 2 · 4. Bot 1 (normal) 0
+OK  Chaos magnétique         niveaux mélangés   160 s   1. Bot 4 (chaos) 8 · 2. Bot 3 (difficile) 4 · 3. Bot 1 (facile) 1 · 4. Bot 2 (normal) 0
+OK  Chaos magnétique         niveaux mélangés   160 s   1. Bot 4 (chaos) 7 · 2. Bot 3 (difficile) 3 · 3. Bot 1 (facile) 0 · 4. Bot 2 (normal) 0
+OK  Chaos magnétique         duel à 2           160 s   1. Bot 2 (normal) 4 · 2. Bot 1 (normal) 0
+OK  Chaos magnétique         duel à 2           160 s   1. Bot 1 (normal) 5 · 1. Bot 2 (normal) 5
+OK  Le Dernier Arrivé        4 bots Normal      130 s   1. Bot 2 (normal) 9 · 2. Bot 1 (normal) 6 · 3. Bot 4 (normal) 5 · 4. Bot 3 (normal) 1
+OK  Le Dernier Arrivé        4 bots Normal      130 s   1. Bot 4 (normal) 7 · 2. Bot 1 (normal) 5 · 2. Bot 3 (normal) 5 · 4. Bot 2 (normal) 4
+OK  Le Dernier Arrivé        niveaux mélangés   120 s   1. Bot 3 (difficile) 12 · 2. Bot 4 (chaos) 6 · 3. Bot 2 (normal) 3 · 4. Bot 1 (facile) 0
+OK  Le Dernier Arrivé        niveaux mélangés   130 s   1. Bot 3 (difficile) 10 · 2. Bot 4 (chaos) 7 · 3. Bot 2 (normal) 4 · 4. Bot 1 (facile) 0
+OK  Le Dernier Arrivé        duel à 2           110 s   1. Bot 2 (normal) 12 · 2. Bot 1 (normal) 0
+OK  Le Dernier Arrivé        duel à 2           120 s   1. Bot 1 (normal) 8 · 2. Bot 2 (normal) 4
+OK  Piège-moi si tu peux     4 bots Normal      150 s   1. Bot 1 (normal) 13 · 2. Bot 3 (normal) 12 · 3. Bot 2 (normal) 12 · 4. Bot 4 (normal) 4
+OK  Piège-moi si tu peux     4 bots Normal      150 s   1. Bot 2 (normal) 22 · 2. Bot 3 (normal) 17 · 3. Bot 1 (normal) 6 · 4. Bot 4 (normal) 1
+OK  Piège-moi si tu peux     niveaux mélangés   150 s   1. Bot 4 (chaos) 14 · 2. Bot 3 (difficile) 13 · 3. Bot 2 (normal) 10 · 4. Bot 1 (facile) 2
+OK  Piège-moi si tu peux     niveaux mélangés   150 s   1. Bot 4 (chaos) 16 · 2. Bot 3 (difficile) 14 · 3. Bot 2 (normal) 9 · 4. Bot 1 (facile) 0
+OK  Piège-moi si tu peux     duel à 2           120 s   1. Bot 1 (normal) 15 · 2. Bot 2 (normal) 9
+OK  Piège-moi si tu peux     duel à 2           120 s   1. Bot 1 (normal) 12 · 2. Bot 2 (normal) 8
+OK  Panne générale           4 bots Normal      150 s   1. Bot 4 (normal) 49 · 2. Bot 3 (normal) 42 · 3. Bot 2 (normal) 39 · 4. Bot 1 (normal) 37
+OK  Panne générale           4 bots Normal      110 s   1. Bot 2 (normal) 46 · 2. Bot 1 (normal) 38 · 3. Bot 3 (normal) 31 · 4. Bot 4 (normal) 28
+OK  Panne générale           niveaux mélangés   110 s   1. Bot 4 (chaos) 51 · 2. Bot 3 (difficile) 49 · 3. Bot 2 (normal) 29 · 4. Bot 1 (facile) 9
+OK  Panne générale           niveaux mélangés   110 s   1. Bot 4 (chaos) 59 · 2. Bot 3 (difficile) 49 · 3. Bot 2 (normal) 32 · 4. Bot 1 (facile) 14
+OK  Panne générale           duel à 2            90 s   1. Bot 2 (normal) 38 · 2. Bot 1 (normal) 25
+OK  Panne générale           duel à 2           150 s   1. Bot 2 (normal) 42 · 2. Bot 1 (normal) 32
+OK  Le Traître               4 bots Normal      170 s   1. Bot 4 (normal) 5 · 4. Bot 1 (normal) 39 · 4. Bot 3 (normal) 36 · 4. Bot 2 (normal) 21
+OK  Le Traître               4 bots Normal      170 s   1. Bot 3 (normal) 1 · 4. Bot 4 (normal) 44 · 4. Bot 2 (normal) 38 · 4. Bot 1 (normal) 25
+OK  Le Traître               niveaux mélangés   100 s   1. Bot 2 (normal) 4 · 4. Bot 3 (difficile) 48 · 4. Bot 4 (chaos) 33 · 4. Bot 1 (facile) 14
+OK  Le Traître               niveaux mélangés   140 s   1. Bot 4 (chaos) 46 · 2. Bot 1 (facile) 29 · 3. Bot 2 (normal) 14 · 4. Bot 3 (difficile) 7
+OK  Le Traître               duel à 2           160 s   1. Bot 1 (normal) 49 · 2. Bot 2 (normal) 40
+OK  Le Traître               duel à 2           120 s   1. Bot 2 (normal) 47 · 2. Bot 1 (normal) 22
+
+0 échec(s)

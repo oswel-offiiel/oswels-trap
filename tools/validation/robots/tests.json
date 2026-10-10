@@ -1,0 +1,552 @@
+[
+[
+"1-1 solo",
+1,
+"runLevel(0,'solo',[walker((e)=>{ const x=e.p.x; if(e.p.onGround && ((x>12.6&&x<13.2)||(x>39.5&&x<40.1))) return {jumpP:true}; })])"
+],
+[
+"1-1 coop",
+1,
+"runLevel(0,'coop',[walker((e)=>{ const x=e.p.x; if(e.p.onGround && ((x>12.6&&x<13.2)||(x>39.5&&x<40.1))) return {jumpP:true}; })])"
+],
+[
+"1-2 solo",
+1,
+"runLevel(1,'solo',[L2route()])"
+],
+[
+"1-2 coop",
+1,
+"runLevel(1,'coop',[L2route(), ((pp)=>(env,i)=> env.k<330 ? {} : pp(env,i))(L2route())])"
+],
+[
+"1-3 solo",
+1,
+"runLevel(2,'solo',[platSmart()], 8000)"
+],
+[
+"1-3 coop",
+1,
+"runLevel(2,'coop',[platCoop()], 9000)"
+],
+[
+"1-4 solo",
+1,
+"runLevel(3,'solo',[L4route()])"
+],
+[
+"1-4 coop",
+1,
+"runLevel(3,'coop',[L4route(), L4route('wait')])"
+],
+[
+"1-5 solo",
+1,
+"runLevel(4,'solo',[pistonBot()])"
+],
+[
+"1-5 coop",
+1,
+"runLevel(4,'coop',[pistonBot()])"
+],
+[
+"1-6 solo",
+1,
+"runLevel(5,'solo',[elecBot()])"
+],
+[
+"1-6 coop",
+1,
+"runLevel(5,'coop',[L6coop()], 8000)"
+],
+[
+"1-7 solo",
+1,
+"runLevel(6,'solo',[walker((e)=>{ const p=e.p; if(p.y>=6.5 && p.onGround) return {jumpP:false, jump:false}; if(p.y>4.5 && p.y<5.5 && p.x>42.5 && p.x<46.5) return {jumpP:false, jump:false}; })])"
+],
+[
+"1-7 coop",
+1,
+"runLevel(6,'coop',[walker((e)=>{ const p=e.p; if(p.y>=6.5 && p.onGround) return {jumpP:false, jump:false}; if(p.y>4.5 && p.y<5.5 && p.x>42.5 && p.x<46.5) return {jumpP:false, jump:false}; })])"
+],
+[
+"1-8 solo",
+1,
+"runLevel(7,'solo',[platSmart()], 8000)"
+],
+[
+"1-8 coop",
+1,
+"runLevel(7,'coop',[platCoop()], 9000)"
+],
+[
+"1-9 solo",
+1,
+"runLevel(8,'solo',[ceilWalker((e)=>{ const x=e.p.x; if(e.p.onGround && x>43.4 && x<44.0) return {jumpP:true}; })])"
+],
+[
+"1-9 coop",
+1,
+"runLevel(8,'coop',[ceilWalker((e)=>{ const x=e.p.x; if(e.p.onGround && x>43.4 && x<44.0) return {jumpP:true}; })])"
+],
+[
+"1-10 solo",
+1,
+"runLevel(9,'solo',[routeBot(bossPlan('solo'), bossKey, waveHook)], 9000)"
+],
+[
+"1-10 coop",
+1,
+"runLevel(9,'coop',[routeBot(bossPlan('striker'), bossKey, waveHook), routeBot(bossPlan('helper'), bossKey, waveHook)], 9000)"
+],
+[
+"2-1 solo",
+2,
+"runLevel(0,'solo',[w21()])"
+],
+[
+"2-1 coop",
+2,
+"runLevel(0,'coop',[w21(), w21()])"
+],
+[
+"2-2 solo",
+2,
+"runLevel(1,'solo',[w22()])"
+],
+[
+"2-2 coop",
+2,
+"runLevel(1,'coop',[w22(), w22()])"
+],
+[
+"2-3 solo",
+2,
+"runLevel(2,'solo',[w23()])"
+],
+[
+"2-3 coop",
+2,
+"runLevel(2,'coop',[w23(), w23()])"
+],
+[
+"2-4 solo",
+2,
+"runLevel(3,'solo',[w24()])"
+],
+[
+"2-4 coop",
+2,
+"runLevel(3,'coop',[w24(), w24()])"
+],
+[
+"2-5 solo",
+2,
+"runLevel(4,'solo',[w25()])"
+],
+[
+"2-5 coop",
+2,
+"runLevel(4,'coop',[w25(), w25()])"
+],
+[
+"2-6 solo",
+2,
+"runLevel(5,'solo',[w26()])"
+],
+[
+"2-6 coop",
+2,
+"runLevel(5,'coop',[w26(), w26()])"
+],
+[
+"2-7 solo",
+2,
+"runLevel(6,'solo',[w27()])"
+],
+[
+"2-7 coop",
+2,
+"runLevel(6,'coop',[w27(), w27()])"
+],
+[
+"2-8 solo",
+2,
+"runLevel(7,'solo',[w28()], 8000)"
+],
+[
+"2-8 coop",
+2,
+"runLevel(7,'coop',[w28(), w28()], 8000)"
+],
+[
+"2-9 solo",
+2,
+"runLevel(8,'solo',[w29()], 8000)"
+],
+[
+"2-9 coop",
+2,
+"runLevel(8,'coop',[w29(), w29()], 8000)"
+],
+[
+"2-10 solo",
+2,
+"runLevel(9,'solo',[wBug()], 12000)"
+],
+[
+"2-10 coop",
+2,
+"runLevel(9,'coop',[wBug(), wBug()], 12000)"
+],
+[
+"3-1 solo",
+3,
+"runLevel(0,'solo',[w31()], 8000)"
+],
+[
+"3-1 coop",
+3,
+"runLevel(0,'coop',[w31(), w31()], 8000)"
+],
+[
+"3-2 solo",
+3,
+"runLevel(1,'solo',[w32()], 8000)"
+],
+[
+"3-2 coop",
+3,
+"runLevel(1,'coop',[w32(), w32()], 8000)"
+],
+[
+"3-3 solo",
+3,
+"runLevel(2,'solo',[w33()], 8000)"
+],
+[
+"3-3 coop",
+3,
+"runLevel(2,'coop',[w33(), w33()], 8000)"
+],
+[
+"3-4 solo",
+3,
+"runLevel(3,'solo',[w34()], 8000)"
+],
+[
+"3-4 coop",
+3,
+"runLevel(3,'coop',[w34(), w34()], 8000)"
+],
+[
+"3-5 solo",
+3,
+"runLevel(4,'solo',[w35()], 8000)"
+],
+[
+"3-5 coop",
+3,
+"runLevel(4,'coop',[w35(), w35()], 8000)"
+],
+[
+"3-6 solo",
+3,
+"runLevel(5,'solo',[w36()], 8000)"
+],
+[
+"3-6 coop",
+3,
+"runLevel(5,'coop',[w36(), w36()], 8000)"
+],
+[
+"3-7 solo",
+3,
+"runLevel(6,'solo',[w37()], 8000)"
+],
+[
+"3-7 coop",
+3,
+"runLevel(6,'coop',[w37(), w37()], 8000)"
+],
+[
+"3-8 solo",
+3,
+"runLevel(7,'solo',[w38()], 8000)"
+],
+[
+"3-8 coop",
+3,
+"runLevel(7,'coop',[w38(), w38()], 8000)"
+],
+[
+"3-9 solo",
+3,
+"runLevel(8,'solo',[w39()], 8000)"
+],
+[
+"3-9 coop",
+3,
+"runLevel(8,'coop',[w39(), w39()], 8000)"
+],
+[
+"3-10 solo",
+3,
+"runLevel(9,'solo',[wExam()], 14000)"
+],
+[
+"3-10 coop",
+3,
+"runLevel(9,'coop',[wExam(), wExam()], 14000)"
+],
+[
+"4-1 solo",
+4,
+"runLevel(0,'solo',[w41()], 8000)"
+],
+[
+"4-1 coop",
+4,
+"runLevel(0,'coop',[seq(w41()), seq(w41())], 8000)"
+],
+[
+"4-2 solo",
+4,
+"runLevel(1,'solo',[w42()], 8000)"
+],
+[
+"4-2 coop",
+4,
+"runLevel(1,'coop',[seq(w42()), seq(w42())], 8000)"
+],
+[
+"4-3 solo",
+4,
+"runLevel(2,'solo',[w43()], 8000)"
+],
+[
+"4-3 coop",
+4,
+"runLevel(2,'coop',[seq(w43()), seq(w43())], 8000)"
+],
+[
+"4-4 solo",
+4,
+"runLevel(3,'solo',[w44()], 8000)"
+],
+[
+"4-4 coop",
+4,
+"runLevel(3,'coop',[seq(w44()), seq(w44())], 8000)"
+],
+[
+"4-5 solo",
+4,
+"runLevel(4,'solo',[w45()], 8000)"
+],
+[
+"4-5 coop",
+4,
+"runLevel(4,'coop',[w45(), w45()], 8000)"
+],
+[
+"4-6 solo",
+4,
+"runLevel(5,'solo',[w46()], 8000)"
+],
+[
+"4-6 coop",
+4,
+"runLevel(5,'coop',[seq(w46()), seq(w46())], 8000)"
+],
+[
+"4-7 solo",
+4,
+"runLevel(6,'solo',[w47()], 8000)"
+],
+[
+"4-7 coop",
+4,
+"runLevel(6,'coop',[seq(w47()), seq(w47())], 8000)"
+],
+[
+"4-8 solo",
+4,
+"runLevel(7,'solo',[w48()], 8000)"
+],
+[
+"4-8 coop",
+4,
+"runLevel(7,'coop',[seq(w48()), seq(w48())], 8000)"
+],
+[
+"4-9 solo",
+4,
+"runLevel(8,'solo',[w49()], 8000)"
+],
+[
+"4-9 coop",
+4,
+"runLevel(8,'coop',[seq(w49()), seq(w49())], 8000)"
+],
+[
+"4-10 solo",
+4,
+"runLevel(9,'solo',[wZeus()], 14000)"
+],
+[
+"4-10 coop",
+4,
+"runLevel(9,'coop',[wZeus(), wZeus()], 14000)"
+],
+[
+"5-1 solo",
+5,
+"runLevel(0,'solo',[w51()], 8000)"
+],
+[
+"5-1 coop",
+5,
+"runLevel(0,'coop',[w51(), w51()], 8000)"
+],
+[
+"5-2 solo",
+5,
+"runLevel(1,'solo',[w52()], 8000)"
+],
+[
+"5-2 coop",
+5,
+"runLevel(1,'coop',[w52(), w52()], 8000)"
+],
+[
+"5-3 solo",
+5,
+"runLevel(2,'solo',[w53()], 8000)"
+],
+[
+"5-3 coop",
+5,
+"runLevel(2,'coop',[w53(), w53()], 8000)"
+],
+[
+"5-4 solo",
+5,
+"runLevel(3,'solo',[w54()], 8000)"
+],
+[
+"5-4 coop",
+5,
+"runLevel(3,'coop',[w54(), w54()], 8000)"
+],
+[
+"5-5 solo",
+5,
+"runLevel(4,'solo',[w55()], 8000)"
+],
+[
+"5-5 coop",
+5,
+"runLevel(4,'coop',[w55(), w55()], 8000)"
+],
+[
+"5-6 solo",
+5,
+"runLevel(5,'solo',[w56()], 8000)"
+],
+[
+"5-6 coop",
+5,
+"runLevel(5,'coop',[w56(), w56()], 8000)"
+],
+[
+"5-7 solo",
+5,
+"runLevel(6,'solo',[w57()], 8000)"
+],
+[
+"5-7 coop",
+5,
+"runLevel(6,'coop',[w57(), w57()], 8000)"
+],
+[
+"5-8 solo",
+5,
+"runLevel(7,'solo',[w58()], 8000)"
+],
+[
+"5-8 coop",
+5,
+"runLevel(7,'coop',[w58(), w58()], 8000)"
+],
+[
+"5-9 solo",
+5,
+"runLevel(8,'solo',[w59()], 8000)"
+],
+[
+"5-9 coop",
+5,
+"runLevel(8,'coop',[w59(), w59()], 8000)"
+],
+[
+"5-10 solo",
+5,
+"runLevel(9,'solo',[wCore()], 14000)"
+],
+[
+"5-10 coop",
+5,
+"runLevel(9,'coop',[wCore(), wCore()], 14000)"
+],
+[
+"1-S solo",
+1,
+"runLevel(10,'solo',[null], 6000)"
+],
+[
+"1-S coop",
+1,
+"runLevel(10,'coop',[null, null], 6000)"
+],
+[
+"2-S solo",
+2,
+"runLevel(10,'solo',[null], 6000)"
+],
+[
+"2-S coop",
+2,
+"runLevel(10,'coop',[null, null], 6000)"
+],
+[
+"3-S solo",
+3,
+"runLevel(10,'solo',[null], 6000)"
+],
+[
+"3-S coop",
+3,
+"runLevel(10,'coop',[null, null], 6000)"
+],
+[
+"4-S solo",
+4,
+"runLevel(10,'solo',[null], 6000)"
+],
+[
+"4-S coop",
+4,
+"runLevel(10,'coop',[null, null], 6000)"
+],
+[
+"5-S solo",
+5,
+"runLevel(10,'solo',[null], 6000)"
+],
+[
+"5-S coop",
+5,
+"runLevel(10,'coop',[null, null], 6000)"
+]
+]

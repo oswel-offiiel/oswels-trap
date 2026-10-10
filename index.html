@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#120d0b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Oswel's Trap : un jeu de plateforme piégé de 1 à 4 joueurs qui raconte le parcours d'Oswel.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<title>Oswel's Trap</title>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--BODY-START-->
+<canvas id="scene"></canvas>
+<div id="bubbles"></div>
+<div id="flash"></div>
+
+<!-- ============ HUD ============ -->
+<div id="hud" hidden>
+  <div class="hud-left">
+    <div id="hud-title">1-1</div>
+    <div class="hud-row">
+      <span class="chip">Chutes <b id="hud-deaths">0</b></span>
+      <span class="chip coinchip" id="hud-coins">0/0</span>
+      <span class="chip mono" id="hud-time">0:00.00</span>
+      <span id="hud-extra"></span>
+    </div>
+    <div id="hud-goal"></div>
+  </div>
+  <div id="hud-vs" hidden></div>
+</div>
+<button id="btn-pause" class="pausebtn" hidden aria-label="Pause">II</button>
+<div id="bossbar" hidden>
+  <div class="bb-top"><b id="boss-name">Le Gardien</b><span id="boss-phase">Phase 1/3</span></div>
+  <div class="bb-track"><div id="boss-fill"></div></div>
+  <div id="boss-help"></div>
+</div>
+<div id="touch" hidden></div>
+<div id="dialog" hidden>
+  <div id="dlg-face"><span id="dlg-letter">P</span></div>
+  <div class="dlg-main">
+    <div id="dlg-name">Oncle Patou</div>
+    <div id="dlg-text"></div>
+    <div id="dlg-hint">Continuer</div>
+  </div>
+</div>
+<div id="toast" hidden></div>
+<!-- ============ SOIRÉE OSWEL : affichage pendant les mini-jeux ============ -->
+<div id="ahud" hidden>
+  <div class="ah-top"><span id="ah-icon"></span><b id="ah-title"></b><small id="ah-round"></small><span id="ah-timer"></span></div>
+  <div id="ah-note"></div>
+  <div id="ah-rows"></div>
+  <div id="ah-panel"></div>
+</div>
+<div id="acount" hidden></div>
+<div id="atuto" hidden><div class="at-h"><b>ENTRAÎNEMENT</b><small>essaie les commandes, sans risque</small><em id="at-t">4</em></div><ul id="at-list"></ul><div id="at-ps"></div></div>
+<div id="abanner" hidden></div>
+<div id="atouch" hidden></div>
+<!-- version 1.4 : sous-titres des voix (ne bloquent jamais le jeu) -->
+<div id="subs" hidden aria-live="polite"></div>
+<div id="goal-banner" hidden><span>Objectif</span><b></b></div>
+<div id="zone-banner"><small></small><b></b><em hidden></em></div>
+<div id="bind-overlay" hidden><div class="panel narrow center"><div class="kicker">Nouvelle touche</div><p id="bind-msg"></p></div></div>
+<div id="cine" hidden>
+  <div class="bar top"></div><div class="bar bottom"></div>
+  <p id="cine-text"></p>
+  <div class="cine-skip"><span id="cine-step"></span><span>Appuie sur un bouton pour passer ▶</span></div>
+</div>
+
+<!-- ============ INSCRIPTION ============ -->
+<section class="screen" id="screen-register" hidden>
+  <div class="panel narrow">
+    <div class="kicker" id="reg-for">Nouveau joueur</div>
+    <h2>Crée ton profil</h2>
+    <p class="muted">Ton profil garde ta progression, tes pièces et tes tenues sur cet appareil.</p>
+    <label class="field" for="reg-name"><span>Pseudo</span>
+      <input id="reg-name" data-nav data-default maxlength="16" autocomplete="off" spellcheck="false" placeholder="Ton pseudo">
+    </label>
+    <p id="reg-error" class="err"></p>
+    <div class="field"><span>Ta couleur</span><div id="reg-colors" class="swatches"></div></div>
+    <nav class="menu">
+      <button class="btn" data-nav data-act="regRandom">Nom au hasard</button>
+      <button class="btn primary" data-nav data-act="regCreate">Créer mon profil</button>
+      <button class="btn ghost" id="reg-cancel" data-nav data-act="regCancel">Annuler</button>
+    </nav>
+    <p class="muted small center"><button class="linkbtn" data-nav data-act="regImport">J'ai déjà un profil : importer mon code de sauvegarde</button></p>
+  </div>
+</section>
+
+<!-- ============ PROFILS ============ -->
+<section class="screen" id="screen-profiles" data-back="title" hidden>
+  <div class="panel">
+    <h2>Qui joue ?</h2>
+    <div id="profile-list" class="plist"></div>
+    <div id="confirm-del" class="confirm" hidden>
+      <p>Supprimer le profil <b id="confirm-name"></b> ? Sa progression et ses pièces seront perdues.</p>
+      <div class="row"><button class="btn danger" data-nav data-act="confirmDelete">Supprimer</button><button class="btn ghost" data-nav data-act="cancelDelete">Garder</button></div>
+    </div>
+    <nav class="menu">
+      <button class="btn" data-nav data-act="newProfile">+ Nouveau profil</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ TITRE ============ -->
+<section class="screen" id="screen-title" hidden>
+  <div class="title-wrap">
+    <div class="kicker">Plateforme troll 2.5D · 1 à 4 joueurs</div>
+    <h1 class="logo"><span>OSWEL'S</span><span>TRAP</span></h1>
+    <p class="tag">Le niveau ment. Puis il enseigne.</p>
+    <button class="who" id="who-chip" data-act="profiles">…</button>
+    <!-- menu principal : les 6 grandes sections du jeu -->
+    <nav class="mainmenu">
+      <button class="mm big" data-nav data-default data-act="play"><i class="mmi"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></i><b>HISTOIRE</b><small>5 mondes · 50 niveaux · coop et versus</small></button>
+      <button class="mm big mp mpbtn" data-nav data-act="mp"><i class="mmi"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.2"/><circle cx="16.5" cy="9" r="2.6"/><path d="M2.5 19c.6-3.6 2.8-5.6 5.5-5.6s4.9 2 5.5 5.6M13.2 14.2c.9-.8 2-1.2 3.3-1.2 2.3 0 4 1.7 4.6 5"/></svg></i><b>MULTIJOUEUR</b><small>Soirée OSWEL · 2 à 4 joueurs</small></button>
+      <button class="mm" data-nav data-act="shop"><i class="mmi"><svg viewBox="0 0 24 24"><path d="M4 8h16l-1.3 11.2a2 2 0 0 1-2 1.8H7.3a2 2 0 0 1-2-1.8z"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3"/></svg></i><b>BOUTIQUE</b><small>Personnage et tenues</small></button>
+      <button class="mm" data-nav data-act="gallery"><i class="mmi"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9.5" cy="10" r="2.3"/><path d="M5.5 17.5c.8-2.2 2.2-3.3 4-3.3s3.2 1.1 4 3.3M15 9h3.5M15 12.5h3.5"/></svg></i><b>GALERIE</b><small>Tous les personnages</small></button>
+      <button class="mm" data-nav data-act="carnet"><i class="mmi"><svg viewBox="0 0 24 24"><path d="M5 3.5h11.5a2 2 0 0 1 2 2v15H7a2 2 0 0 1-2-2z"/><path d="M5 18.5a2 2 0 0 1 2-2h11.5M9 8h6M9 11.5h4"/></svg></i><b>CARNET</b><small>Leçons et personnages</small></button>
+      <button class="mm" data-nav data-act="board"><i class="mmi"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/></svg></i><b>CLASSEMENT</b><small>Meilleurs temps</small></button>
+      <button class="mm" data-nav data-act="profiles"><i class="mmi"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1-4 4.2-6.2 8-6.2s7 2.2 8 6.2"/></svg></i><b>PROFIL</b><small>Joueurs et sauvegardes</small></button>
+      <button class="mm" data-nav data-act="options"><i class="mmi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M21.2 12h-2.6M5.4 12H2.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8M18.5 18.5l-1.8-1.8M7.3 7.3 5.5 5.5"/></svg></i><b>PARAMÈTRES</b><small>Touches, caméra, son</small></button>
+    </nav>
+    <nav class="menu row sub">
+      <button class="btn small ghost lanbtn" data-nav data-act="lan">📶 Réseau local</button>
+      <button class="btn small ghost" data-nav data-act="fullscreen">⛶ Plein écran</button>
+      <button class="btn small ghost" id="btn-install" data-nav data-act="install" hidden>⬇ Installer le jeu</button>
+      <button class="btn small ghost" id="btn-quit" data-nav data-act="quitApp" hidden>✕ Quitter</button>
+    </nav>
+    <p class="foot" id="title-foot">Version 1.2 · par OSWEL OFFICIEL</p>
+  </div>
+  <!-- le personnage du joueur, en 3D (on peut le faire tourner) -->
+  <div class="title-hero" id="title-hero" aria-hidden="true"></div>
+</section>
+
+<!-- ============ SOIRÉE OSWEL (multijoueur) ============ -->
+<section class="screen" id="screen-soiree" data-back="title" hidden>
+  <div class="panel wide soiree">
+    <div class="kicker">Multijoueur · 1 à 4 joueurs · les places libres sont des bots</div>
+    <h2>Soirée OSWEL</h2>
+    <div class="so-grid">
+      <div class="so-col">
+        <h3>Jouer</h3>
+        <button class="mode" data-nav data-default data-act="soFormula:rapide"><b>Partie rapide</b><span>3 activités au hasard · 8 à 10 min</span></button>
+        <button class="mode" data-nav data-act="soFormula:surprise"><b>Soirée surprise</b><span>5 activités au hasard, avec des surprises entre deux</span></button>
+        <button class="mode" data-nav data-act="soFormula:choisir"><b>Choisir les activités</b><span>Ta liste, dans ton ordre (une seule pour s'entraîner)</span></button>
+        <button class="mode" data-nav data-act="soFormula:tournoi"><b>Tournoi</b><span>Les 9 activités, puis une finale en duel</span></button>
+      </div>
+      <div class="so-col">
+        <h3>Réglages</h3>
+        <button class="opt" data-nav data-act="soLevel"><span>Niveau des bots</span><b id="so-level">Normal</b></button>
+        <button class="opt" data-nav data-act="soFill"><span>Compléter avec des bots (à 2 joueurs ou plus)</span><b id="so-fill">Oui</b></button>
+        <button class="opt" data-nav data-act="soLan"><span>Réseau local (téléphones et PC = manettes)</span><b>Ouvrir →</b></button>
+        <h3>Les activités</h3>
+        <div id="so-games"></div>
+      </div>
+    </div>
+    <nav class="menu row"><button class="btn ghost" data-nav data-act="back">Retour</button></nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-ajoin" data-back="soiree" hidden>
+  <div class="panel wide">
+    <div class="kicker" id="aj-kicker"></div>
+    <h2>Qui joue ?</h2>
+    <div id="aj-slots"></div>
+    <div class="join-help" id="aj-help"></div>
+    <nav class="menu row">
+      <button class="btn primary" id="aj-go" data-nav data-default data-act="ajGo">C'est parti !</button>
+      <button class="btn" id="aj-touch" data-nav data-act="ajTouch" hidden>Jouer sur cet écran tactile</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-aacts" data-back="soiree" hidden>
+  <div class="panel wide">
+    <div class="kicker" id="aa-kicker"></div>
+    <h2>Qu'est-ce qu'on joue ?</h2>
+    <p class="muted small">Choisis les activités dans l'ordre où tu veux les jouer. Une seule suffit pour s'entraîner.</p>
+    <div id="aa-grid"></div>
+    <nav class="menu row">
+      <button class="btn primary" id="aa-go" data-nav data-default data-act="aaGo">Jouer</button>
+      <button class="btn" data-nav data-act="aaAll">Tout prendre</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-aintro" hidden>
+  <div class="panel aintro" id="ai-card">
+    <div class="ai-num" id="ai-num">MINI-JEU 01</div>
+    <div class="kicker" id="ai-kicker"></div>
+    <div class="ai-head"><span class="ai-icon" id="ai-icon"></span><div><h2 id="ai-name"></h2><p class="ai-tag" id="ai-tag"></p></div></div>
+    <div class="ai-grid">
+      <div class="ai-box goal"><b>🎯 OBJECTIF</b><p id="ai-goal"></p></div>
+      <div class="ai-box how"><b>🎮 COMMENT JOUER</b><ul id="ai-how"></ul></div>
+      <div class="ai-box danger"><b>⚠️ DANGER</b><p id="ai-danger"></p></div>
+      <div class="ai-box win"><b>🏆 VICTOIRE</b><p id="ai-win"></p></div>
+      <div class="ai-box lose"><b>💥 DÉFAITE</b><p id="ai-lose"></p></div>
+    </div>
+    <div class="ai-keys" id="ai-keys"></div>
+    <div class="ai-players" id="ai-players"></div>
+    <nav class="menu row">
+      <button class="btn primary" data-nav data-default data-act="aiGo">Jouer ! <small>(A)</small></button>
+      <button class="btn ghost" data-nav data-act="aiBack">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-apause" hidden>
+  <div class="panel narrow center">
+    <div class="kicker" id="ap-who">Pause</div>
+    <h2 id="ap-game"></h2>
+    <ul class="ai-rules" id="ap-rules"></ul>
+    <nav class="menu">
+      <button class="btn primary" data-nav data-default data-act="apResume">Reprendre</button>
+      <button class="btn" data-nav data-act="apRestart">Recommencer l'activité</button>
+      <button class="btn" data-nav data-act="apQuit">Quitter l'activité</button>
+      <button class="btn ghost" data-nav data-act="apLeave">Quitter la soirée</button>
+    </nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-ares" hidden>
+  <div class="panel wide ares">
+    <div class="kicker">Résultats</div>
+    <h2 id="ar-title"></h2>
+    <div class="podium3d" id="ar-pod3d"></div>
+    <p class="ar-win" id="ar-win"></p>
+    <div id="ar-rows"></div>
+    <div class="ar-total"><span class="muted">Soirée :</span> <span id="ar-total"></span></div>
+    <nav class="menu row">
+      <button class="btn primary" id="ar-next" data-nav data-default data-act="arNext">Activité suivante</button>
+      <button class="btn" data-nav data-act="arReplay">Rejouer (revanche !)</button>
+      <button class="btn ghost" data-nav data-act="arBack">Retour aux activités</button>
+    </nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-achamp" hidden>
+  <div id="ac-confetti"></div>
+  <div class="panel center achamp">
+    <div class="kicker">Champion de la soirée</div>
+    <h2 id="ac-name"></h2>
+    <p class="muted" id="ac-sub"></p>
+    <div class="podium3d big" id="ac-pod3d"></div>
+    <div id="ac-pod"></div>
+    <ol id="ac-rows"></ol>
+    <nav class="menu row">
+      <button class="btn primary" data-nav data-default data-act="acAgain">Revanche : même soirée</button>
+      <button class="btn" data-nav data-act="acMenu">Nouvelle soirée</button>
+      <button class="btn ghost" data-nav data-act="title">Menu principal</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ MODE ============ -->
+<!-- version 1.5 : RÉSEAU LOCAL (héberger sur ce PC / rejoindre un autre PC) — contenu rempli par js/lan.js -->
+<section class="screen" id="screen-lan" data-back="title" hidden>
+  <div class="panel wide lan">
+    <div class="kicker">Même Wi-Fi · téléphones et PC deviennent des manettes · jusqu'à 4 joueurs</div>
+    <h2>Réseau local</h2>
+    <div id="lan-body"></div>
+    <nav class="menu row"><button class="btn ghost" data-nav data-act="back">Retour</button></nav>
+  </div>
+</section>
+
+<section class="screen" id="screen-mode" data-back="title" hidden>
+  <div class="panel">
+    <div class="kicker">Le mode Histoire</div>
+    <h2>Choisis ton mode</h2>
+    <div class="modes">
+      <button class="mode" data-nav data-default data-act="mode:solo"><b>Solo</b><span>Seul face aux pièges.</span></button>
+      <button class="mode" data-nav data-act="mode:coop"><b>Coopération</b><span>Les deux joueurs doivent atteindre la porte. Si l'un tombe, tout recommence pour les deux.</span></button>
+      <button class="mode" data-nav data-act="mode:versus"><b>Versus</b><span>Mêmes niveaux, le premier à la porte marque le point. Chacun garde ses pièces.</span></button>
+    </div>
+    <button class="btn ghost" data-nav data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ JOUEUR 2 ============ -->
+<section class="screen" id="screen-p2" data-back="mode" hidden>
+  <div class="panel">
+    <div class="kicker">Deux joueurs</div>
+    <h2>Qui est le joueur 2 ?</h2>
+    <div id="p2-list" class="plist"></div>
+    <p class="muted small">Joueur 2 : deuxième manette, flèches du clavier, ou option « deux joueurs tactiles ».</p>
+    <nav class="menu">
+      <button class="btn" data-nav data-act="newP2">+ Créer un profil pour le joueur 2</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ MONDES ============ -->
+<section class="screen" id="screen-worlds" data-back="mode" hidden>
+  <div class="panel wide">
+    <div class="kicker">Mode <span id="worlds-mode">Solo</span></div>
+    <h2>Les cinq mondes d'Oswel</h2>
+    <div id="world-list"></div>
+    <button class="btn ghost" data-nav data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ NIVEAUX ============ -->
+<section class="screen" id="screen-levels" data-back="worlds" hidden>
+  <div class="panel wide">
+    <div class="kicker" id="levels-kicker">Monde 1 · Mode Solo</div>
+    <h2 id="levels-title">La Forge</h2>
+    <p class="muted" id="levels-motto"></p>
+    <div id="level-grid"></div>
+    <p class="muted small legend"><span class="md or"></span> or · <span class="md argent"></span> argent · <span class="md bronze"></span> bronze · <span class="nofall">✦</span> sans chute (mode normal)</p>
+    <nav class="menu row">
+      <button class="btn primary" id="btn-quiz" data-nav data-act="quiz" hidden>Passer le quiz</button>
+      <button class="btn" data-nav data-act="board">Classement</button>
+      <button class="btn" id="btn-intro" data-nav data-act="replayIntro">Revoir l'intro</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ PAUSE ============ -->
+<section class="screen" id="screen-pause" data-back="game" hidden>
+  <div class="panel narrow">
+    <h2>Pause</h2>
+    <p class="goalline" id="pause-goal"></p>
+    <p class="goalline bossline" id="pause-boss"></p>
+    <nav class="menu">
+      <button class="btn primary" data-nav data-default data-act="resume">Reprendre</button>
+      <button class="btn" data-nav data-act="restart">Recommencer le niveau</button>
+      <button class="btn" data-nav data-act="journal">Journal (quêtes, indices, boss)</button>
+      <button class="btn" data-nav data-act="options">Options &amp; touches</button>
+      <button class="btn" data-nav data-act="bug">Signaler un bug</button>
+      <button class="btn ghost" data-nav data-act="quit">Quitter vers le menu</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ FIN DE NIVEAU ============ -->
+<section class="screen" id="screen-done" hidden>
+  <div class="panel narrow done">
+    <div class="kicker" id="done-kicker">Niveau terminé</div>
+    <h2 id="done-title">Titre</h2>
+    <blockquote id="done-fragment"></blockquote>
+    <div class="stats" id="done-stats"></div>
+    <div class="medalbox" id="done-medal" hidden></div>
+    <div id="done-rival"></div>
+    <ul class="rewards" id="done-rewards"></ul>
+    <nav class="menu">
+      <button class="btn primary" data-nav data-default data-act="toLesson">Découvrir la leçon</button>
+      <button class="btn" data-nav data-act="replay">Rejouer</button>
+      <button class="btn ghost" data-nav data-act="menu">Choix du niveau</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ LEÇON ============ -->
+<section class="screen" id="screen-lesson" hidden>
+  <article class="lesson-card">
+    <div class="kicker" id="lesson-kicker">Leçon</div>
+    <h2 id="lesson-title">Titre</h2>
+    <p id="lesson-text"></p>
+    <p class="note">Retiens-la : elle reviendra dans le quiz de fin de monde.</p>
+    <nav class="menu">
+      <button class="btn primary" id="btn-lesson-next" data-nav data-default data-act="next">Niveau suivant</button>
+      <button class="btn ghost" data-nav data-act="menu">Choix du niveau</button>
+    </nav>
+  </article>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="screen" id="screen-quiz" data-back="levels" hidden>
+  <div class="panel quiz">
+    <div class="kicker" id="quiz-kicker">Quiz de fin de monde</div>
+    <div class="qbar"><div id="quiz-bar"></div></div>
+    <p class="muted small" id="quiz-progress"></p>
+    <h2 id="quiz-q">Question</h2>
+    <div id="quiz-opts"></div>
+    <div id="quiz-feedback" hidden>
+      <p id="quiz-verdict"></p>
+      <p id="quiz-explain"></p>
+      <button class="btn primary" id="btn-quiz-next" data-nav data-act="quizNext">Question suivante</button>
+    </div>
+  </div>
+</section>
+<section class="screen" id="screen-quizresult" data-back="levels" hidden>
+  <div class="panel narrow center">
+    <div class="kicker">Résultat du quiz</div>
+    <div class="bigscore" id="qr-score">0 / 10</div>
+    <h2 id="qr-title">Quiz réussi !</h2>
+    <p id="qr-text"></p>
+    <p class="gain" id="qr-gain"></p>
+    <nav class="menu">
+      <button class="btn primary" id="btn-qr-main" data-nav data-default data-act="readChapterNew">Lire le Chapitre 1</button>
+      <button class="btn" data-nav data-act="carnet">Relire les leçons</button>
+      <button class="btn ghost" data-nav data-act="menu">Choix du niveau</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE ============ -->
+<section class="screen" id="screen-chapter" hidden>
+  <article class="chapter">
+    <div class="kicker">Chapitre débloqué</div>
+    <h2 id="chap-title">Chapitre 1</h2>
+    <div id="chap-body"></div>
+    <button class="btn primary" data-nav data-default data-act="chapterDone">Continuer</button>
+  </article>
+</section>
+<section class="screen" id="screen-soon" data-back="levels" hidden>
+  <div class="panel narrow center">
+    <div class="kicker" id="soon-kicker">Monde terminé</div>
+    <h2 id="soon-title">Le Code</h2>
+    <p id="soon-text"></p>
+    <p class="muted" id="soon-sub"></p>
+    <nav class="menu">
+      <button class="btn primary" id="btn-soon-main" data-nav data-default data-act="carnet">Ouvrir le Carnet</button>
+      <button class="btn" id="btn-soon-carnet" data-nav data-act="carnet">Le Carnet d'Oswel</button>
+      <button class="btn ghost" data-nav data-act="quit">Menu principal</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ CARNET ============ -->
+<section class="screen" id="screen-carnet" data-back="title" hidden>
+  <div class="panel wide">
+    <div class="kicker">Ce qu'Oswel a appris jusqu'ici</div>
+    <h2>Le Carnet d'Oswel</h2>
+    <div id="carnet-list"></div>
+    <button class="btn ghost" data-nav data-default data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ BOUTIQUE ============ -->
+<section class="screen" id="screen-shop" data-back="title" hidden>
+  <div class="panel wide shop">
+    <div class="shop-head">
+      <div><div class="kicker">Personnalisation &amp; boutique · <span id="shop-who"></span></div><h2>Mon personnage</h2></div>
+      <div class="purse" id="shop-coins"></div>
+    </div>
+    <div class="shop-body">
+      <div class="shop-stage">
+        <div id="shop-preview" class="preview"></div>
+        <div class="stage-tools">
+          <button class="btn small" data-nav data-act="pvPlay:win">▶ Victoire</button>
+          <button class="btn small" data-nav data-act="pvPlay:emote">▶ Émote</button>
+          <button class="btn small ghost" data-nav data-act="pvPlay:reset" aria-label="Recentrer">⟲</button>
+        </div>
+        <div class="shop-desc" id="shop-desc"></div>
+        <p class="stage-hint">Tourner : glisser ou stick droit · Zoom : molette, pincer, R2 / L2</p>
+      </div>
+      <div class="shop-lists">
+        <div class="tabs" id="shop-tabs">
+          <button class="tab" data-nav data-stab="char" data-act="shopTab:char">Personnage</button>
+          <button class="tab" data-nav data-stab="colors" data-act="shopTab:colors">Tenue</button>
+          <button class="tab" data-nav data-stab="acc" data-act="shopTab:acc">Tête</button>
+          <button class="tab" data-nav data-stab="gad" data-act="shopTab:gad">Gadgets <small id="shop-gad-n"></small></button>
+          <button class="tab" data-nav data-stab="fx" data-act="shopTab:fx">Effets</button>
+          <button class="tab" data-nav data-stab="win" data-act="shopTab:win">Victoire</button>
+          <button class="tab" data-nav data-stab="emote" data-act="shopTab:emote">Émotes</button>
+        </div>
+        <div class="ssec" data-sec="char"><div id="shop-char" class="items chars"></div></div>
+        <div class="ssec" data-sec="colors"><div id="shop-colors" class="items"></div></div>
+        <div class="ssec" data-sec="acc"><div id="shop-acc" class="items"></div></div>
+        <div class="ssec" data-sec="gad">
+          <p class="muted small">Chaque monde a ses objets : arrive dans un monde pour les débloquer. Tu portes un gadget en plus de ton accessoire. <b>Les gadgets changent seulement l'apparence</b> (aucun effet sur le jeu). Le seul équipement utile, la Boussole d'Isaïe, se gagne par une quête.</p>
+          <div id="shop-gad"></div>
+        </div>
+        <div class="ssec" data-sec="fx"><div id="shop-fx" class="items"></div></div>
+        <div class="ssec" data-sec="win"><div id="shop-win" class="items"></div></div>
+        <div class="ssec" data-sec="emote"><div id="shop-emote" class="items"></div></div>
+      </div>
+    </div>
+    <nav class="menu row">
+      <button class="btn" id="shop-switch" data-nav data-act="shopSwitch" hidden>Changer de joueur</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ GALERIE DES PERSONNAGES ============ -->
+<section class="screen" id="screen-gallery" data-back="title" hidden>
+  <div class="panel wide gallery">
+    <div class="kicker">Galerie</div>
+    <h2>Les personnages</h2>
+    <div class="tabs" id="gal-tabs">
+      <button class="tab" data-nav data-gtab="play" data-act="galTab:play">Jouables <small id="gal-n-play"></small></button>
+      <button class="tab" data-nav data-gtab="story" data-act="galTab:story">L'histoire <small id="gal-n-story"></small></button>
+      <button class="tab" data-nav data-gtab="boss" data-act="galTab:boss">Boss et rivaux <small id="gal-n-boss"></small></button>
+    </div>
+    <div class="gal-body">
+      <div class="gal-stage">
+        <div id="gal-preview" class="preview"></div>
+        <div class="gal-card" id="gal-card"></div>
+      </div>
+      <div class="gal-list" id="gal-list"></div>
+    </div>
+    <nav class="menu row"><button class="btn ghost" data-nav data-act="back">Retour</button></nav>
+  </div>
+</section>
+
+<!-- ============ OPTIONS ============ -->
+<section class="screen" id="screen-options" data-back="title" hidden>
+  <div class="panel">
+    <h2>Paramètres</h2>
+    <p class="pads" id="pads-status"></p>
+    <div class="opts">
+      <h3 class="optgrp">Gameplay</h3>
+      <button class="opt" data-nav data-default data-act="opt:diff"><span>Difficulté</span><b id="opt-diff"></b></button>
+      <div class="opt optspeed" id="opt-speed"><span>Vitesse du gameplay<small>Personnages, pièges et boss ralentissent ou accélèrent ensemble : les niveaux restent faisables.</small></span>
+        <div class="sp-ctl"><button class="sp-b" data-nav data-act="speed:-1" aria-label="Plus lent">◀</button><em>Lent</em><span class="sp-dots"></span><em>Rapide</em><button class="sp-b" data-nav data-act="speed:1" aria-label="Plus rapide">▶</button></div>
+        <b class="sp-val"></b><button class="sp-r" data-nav data-act="speed:0">100 %</button></div>
+      <button class="opt" data-nav data-act="opt:ghost"><span>Fantôme de l'essai précédent (solo)</span><b id="opt-ghost"></b></button>
+      <h3 class="optgrp">Commandes, son et affichage</h3>
+      <button class="opt" data-nav data-act="keys"><span>Changer les touches</span><b>Clavier et manette →</b></button>
+      <button class="opt" data-nav data-act="controls"><span>Voir les commandes</span><b>Résumé →</b></button>
+      <button class="opt" data-nav data-act="opt:vib"><span>Vibrations</span><b id="opt-vib"></b></button>
+      <button class="opt" data-nav data-act="opt:vibs"><span>Force des vibrations</span><b id="opt-vibs"></b></button>
+      <button class="opt" data-nav data-act="opt:test"><span>Tester les vibrations</span><b>Diagnostic →</b></button>
+      <button class="opt" data-nav data-act="light"><span>Mode direct PS4 (boutons, lumière, vibrations)</span><b id="opt-light"></b></button>
+      <h3 class="optgrp">Son, voix et sous-titres</h3>
+      <button class="opt" data-nav data-act="opt:master"><span>Volume général</span><b id="opt-master"></b></button>
+      <button class="opt" data-nav data-act="opt:music"><span>Musique</span><b id="opt-music"></b></button>
+      <button class="opt" data-nav data-act="opt:vol"><span>Bruitages</span><b id="opt-vol"></b></button>
+      <button class="opt" data-nav data-act="opt:voicevol"><span>Voix</span><b id="opt-voicevol"></b></button>
+      <button class="opt" data-nav data-act="opt:voices"><span>Voix des personnages<small>Dialogues, cinématiques, boss et petites réactions.</small></span><b id="opt-voices"></b></button>
+      <button class="opt" data-nav data-act="opt:subs"><span>Sous-titres</span><b id="opt-subs"></b></button>
+      <button class="opt" data-nav data-act="opt:tts"><span>Voix de synthèse de secours<small>Si une réplique n'a pas d'enregistrement, la voix du téléphone ou de l'ordinateur la lit.</small></span><b id="opt-tts"></b></button>
+      <button class="opt" data-nav data-act="opt:voicetest"><span>Tester les voix</span><b>Écouter →</b></button>
+      <h3 class="optgrp">Manettes, caméra et affichage</h3>
+      <button class="opt" data-nav data-act="opt:swap"><span>Attribution des manettes</span><b id="opt-swap"></b></button>
+      <button class="opt" data-nav data-act="opt:camsens"><span>Caméra : vitesse de rotation</span><b id="opt-camsens"></b></button>
+      <button class="opt" data-nav data-act="opt:caminv"><span>Caméra : haut / bas</span><b id="opt-caminv"></b></button>
+      <button class="opt" data-nav data-act="opt:camrec"><span>Caméra : revient seule derrière l'action</span><b id="opt-camrec"></b></button>
+      <button class="opt" data-nav data-act="opt:camtrig"><span>Gâchettes L2 / R2</span><b id="opt-camtrig"></b></button>
+      <button class="opt" data-nav data-act="opt:touch"><span>Boutons tactiles</span><b id="opt-touch"></b></button>
+      <button class="opt" data-nav data-act="opt:touch2p"><span>Deux joueurs sur l'écran tactile</span><b id="opt-touch2p"></b></button>
+      <button class="opt" data-nav data-act="opt:touchsize"><span>Taille des boutons tactiles</span><b id="opt-touchsize"></b></button>
+      <button class="opt" data-nav data-act="opt:shadows"><span>Ombres</span><b id="opt-shadows"></b></button>
+      <button class="opt" data-nav data-act="online"><span>En ligne et sauvegarde</span><b id="opt-online"></b></button>
+      <button class="opt" data-nav data-act="bug"><span>Signaler un bug</span><b>Écrire à Oswel →</b></button>
+    </div>
+    <button class="btn ghost" data-nav data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ TOUCHES ============ -->
+<section class="screen" id="screen-keys" data-back="options" hidden>
+  <div class="panel">
+    <h2>Changer les touches</h2>
+    <div class="tabs">
+      <button class="tab" data-nav data-keytab="0:kb" data-act="keyTab:0-kb">J1 · Clavier</button>
+      <button class="tab" data-nav data-keytab="1:kb" data-act="keyTab:1-kb">J2 · Clavier</button>
+      <button class="tab" data-nav data-keytab="0:pad" data-act="keyTab:0-pad">J1 · Manette</button>
+      <button class="tab" data-nav data-keytab="1:pad" data-act="keyTab:1-pad">J2 · Manette</button>
+    </div>
+    <div id="key-rows" class="opts"></div>
+    <nav class="menu row">
+      <button class="btn" data-nav data-act="resetKeys">Touches par défaut</button>
+      <button class="btn ghost" data-nav data-default data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ COMMANDES ============ -->
+<section class="screen" id="screen-controls" data-back="options" hidden>
+  <div class="panel wide">
+    <h2>Commandes</h2>
+    <div class="ctrl-wrap">
+      <table class="ctrl">
+        <thead><tr><th>Action</th><th>Manette PS4</th><th>Clavier · Joueur 1</th><th>Clavier · Joueur 2</th></tr></thead>
+        <tbody id="ctrl-body"></tbody>
+      </table>
+    </div>
+    <p class="muted">Sur Android : boutons à l'écran (◀ ▶, SAUT, ACTION, COURIR). Tourne le téléphone en paysage.</p>
+    <p class="muted">Vibrations : atterrissages, morts, pistons qui vont tomber, courant qui revient, et de plus en plus fort près des objets cachés.</p>
+    <button class="btn ghost" data-nav data-default data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ CLASSEMENT ============ -->
+<section class="screen" id="screen-board" data-back="title" hidden>
+  <div class="panel">
+    <div class="kicker">Classement</div>
+    <div class="board-nav">
+      <button class="btn small" data-nav data-act="boardMove:-1" aria-label="Niveau précédent">◀</button>
+      <h2 id="board-level">1-1</h2>
+      <button class="btn small" data-nav data-default data-act="boardMove:1" aria-label="Niveau suivant">▶</button>
+    </div>
+    <p class="muted small" id="board-par"></p>
+    <div class="boards">
+      <div><h3>Sur cet appareil</h3><ol class="board" id="board-local"></ol></div>
+      <div><h3>En ligne</h3><ol class="board" id="board-online"></ol></div>
+    </div>
+    <button class="btn ghost" data-nav data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ EN LIGNE ET SAUVEGARDE ============ -->
+<section class="screen" id="screen-online" data-back="options" hidden>
+  <div class="panel">
+    <h2>En ligne et sauvegarde</h2>
+    <h3>Code de sauvegarde</h3>
+    <p class="muted small">Ton profil entier (progression, pièces, tenues) dans un texte. Garde-le pour le retrouver sur un autre appareil ou après avoir vidé le navigateur.</p>
+    <textarea id="save-code" data-nav rows="3" spellcheck="false" placeholder="Colle ici un code OT4:… pour l'importer"></textarea>
+    <nav class="menu row">
+      <button class="btn" data-nav data-default data-act="codeExport">Afficher mon code</button>
+      <button class="btn" data-nav data-act="codeCopy">Copier</button>
+      <button class="btn" data-nav data-act="codeImport">Importer ce code</button>
+    </nav>
+    <h3>Serveur en ligne (facultatif)</h3>
+    <p class="muted small">Pour le classement mondial, les signalements de bugs et la sauvegarde dans le nuage. Le serveur est fourni dans le dossier « serveur » du jeu.</p>
+    <label class="field" for="srv-url"><span>Adresse du serveur</span>
+      <input id="srv-url" data-nav autocomplete="off" spellcheck="false" placeholder="https://ton-nom.pythonanywhere.com">
+    </label>
+    <p class="muted small" id="srv-status"></p>
+    <nav class="menu row">
+      <button class="btn" data-nav data-act="srvSave">Enregistrer</button>
+      <button class="btn" data-nav data-act="srvTest">Tester la connexion</button>
+    </nav>
+    <div id="cloud-box" hidden>
+      <h3>Sauvegarde dans le nuage</h3>
+      <nav class="menu row">
+        <button class="btn" data-nav data-act="cloudPush">Envoyer mon profil → code court</button>
+        <input id="cloud-code" class="codein" data-nav maxlength="8" autocomplete="off" spellcheck="false" placeholder="CODE">
+        <button class="btn" data-nav data-act="cloudPull">Récupérer</button>
+      </nav>
+      <p class="muted small" id="cloud-status"></p>
+    </div>
+    <button class="btn ghost" data-nav data-act="back">Retour</button>
+  </div>
+</section>
+
+<!-- ============ SIGNALER UN BUG ============ -->
+<section class="screen" id="screen-bug" data-back="options" hidden>
+  <div class="panel">
+    <div class="kicker">Aide Oswel à améliorer le jeu</div>
+    <h2>Signaler un bug</h2>
+    <p class="muted small" id="bug-hint"></p>
+    <textarea id="bug-text" data-nav data-default rows="4" maxlength="4000" placeholder="Qu'est-ce qui s'est passé ? Qu'est-ce que tu attendais ? (ex. : « au niveau 2-3, je suis passé à travers le pont »)"></textarea>
+    <details class="buginfo"><summary>Informations ajoutées automatiquement</summary><pre id="bug-info"></pre></details>
+    <nav class="menu row">
+      <button class="btn primary" id="bug-send" data-nav data-act="bugSend">Envoyer</button>
+      <button class="btn" data-nav data-act="bugCopy">Copier le rapport</button>
+      <button class="btn ghost" data-nav data-act="back">Retour</button>
+    </nav>
+  </div>
+</section>
+
+<div id="rotate" hidden><div class="phone"></div><p>Tourne ton téléphone en mode paysage</p></div>
+<div id="boot-error" hidden><p>Impossible de charger le moteur 3D (three.min.js). Vérifie que le dossier <b>js</b> est bien à côté de ce fichier.</p></div>
+<!--BODY-END-->
+
+<script src="js/three.min.js"></script>
+<script>
+  if (!window.THREE) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+</script>
+<script src="js/data.js"></script>
+<script src="js/world2.js"></script>
+<script src="js/world3.js"></script>
+<script src="js/world4.js"></script>
+<script src="js/world5.js"></script>
+<script src="js/extensions.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/histoire.js"></script>
+<script src="js/sections.js"></script>
+<script src="js/pieges3.js"></script>
+<script src="js/levelplans.js"></script>
+<script src="js/repliques.js"></script>
+<script src="js/reactions.js"></script>
+<script src="js/quetes.js"></script>
+<script src="js/pouvoirs.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/voices.js"></script>
+<script src="js/input.js"></script>
+<script src="js/music.js"></script>
+<script src="js/light.js"></script>
+<script src="js/net.js"></script>
+<script src="js/models.js"></script>
+<script src="js/chars.js"></script>
+<script src="js/portrait.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/journal.js"></script>
+<script src="js/progression.js"></script>
+<script src="js/arena/core.js"></script>
+<script src="js/arena/stadium.js"></script>
+<script src="js/arena/podium.js"></script>
+<script src="js/arena/ui.js"></script>
+<script src="js/arena/games/boum.js"></script>
+<script src="js/arena/games/patate.js"></script>
+<script src="js/arena/games/vole.js"></script>
+<script src="js/arena/games/tresor.js"></script>
+<script src="js/arena/games/train.js"></script>
+<script src="js/arena/games/magnet.js"></script>
+<script src="js/arena/games/course.js"></script>
+<script src="js/arena/games/piege.js"></script>
+<script src="js/arena/games/panne.js"></script>
+  <!--ARENA-GAMES-->
+<script src="js/qrcode.js"></script>
+<script src="js/lan.js"></script>
+<script src="js/splash.js"></script>
+</body>
+</html>

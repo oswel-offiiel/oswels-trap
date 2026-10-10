@@ -1,0 +1,92 @@
+{
+  "name": "oswels-trap",
+  "productName": "Oswel's Trap",
+  "version": "1.5.0",
+  "description": "Oswel's Trap — plateforme troll 2.5D, 1 à 4 joueurs, version PC (Windows et Linux) avec réseau local.",
+  "author": {
+    "name": "OSWEL OFFICIEL"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "jeu": "node preparer.js",
+    "start": "node preparer.js && electron .",
+    "serveur": "node serveur-lan.js",
+    "linux": "node preparer.js && electron-builder --linux --publish never",
+    "windows": "node preparer.js && electron-builder --win --publish never",
+    "tout": "node preparer.js && electron-builder --linux --win --publish never"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "electron": "^44.7.0",
+    "electron-builder": "^26.0.0",
+    "resedit": "^3.1.0"
+  },
+  "build": {
+    "appId": "officiel.oswel.trap",
+    "productName": "Oswel's Trap",
+    "copyright": "© OSWEL OFFICIEL",
+    "directories": {
+      "output": "dist",
+      "buildResources": "ressources"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "serveur-lan.js",
+      "package.json",
+      "jeu/**/*",
+      "node_modules/ws/**/*"
+    ],
+    "asar": true,
+    "asarUnpack": [],
+    "linux": {
+      "target": [
+        "AppImage",
+        "pacman",
+        "deb",
+        "tar.gz"
+      ],
+      "category": "Game",
+      "icon": "ressources/icone.png",
+      "executableName": "oswels-trap",
+      "synopsis": "Plateforme troll 2.5D, 1 à 4 joueurs",
+      "maintainer": "OSWEL OFFICIEL <oswel@localhost>",
+      "artifactName": "Oswels-Trap-${version}-linux-${arch}.${ext}",
+      "desktop": {
+        "entry": {
+          "Name": "Oswel's Trap",
+          "Comment": "Plateforme troll 2.5D, 1 à 4 joueurs",
+          "Categories": "Game;ActionGame;"
+        }
+      }
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "ressources/icone.ico",
+      "signAndEditExecutable": false,
+      "artifactName": "Oswels-Trap-${version}-windows-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Oswel's Trap",
+      "artifactName": "Oswels-Trap-${version}-windows-installation.${ext}"
+    },
+    "afterPack": "ressources/apres-emballage.js"
+  },
+  "desktopName": "oswels-trap.desktop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oswel-officiel/oswels-trap.git"
+  }
+}

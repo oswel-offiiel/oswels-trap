@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Oswel\'s Trap</string>
+    <string name="title_activity_main">Oswel\'s Trap</string>
+    <string name="package_name">officiel.oswel.trap</string>
+    <string name="custom_url_scheme">officiel.oswel.trap</string>
+</resources>

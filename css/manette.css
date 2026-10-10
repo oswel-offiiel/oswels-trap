@@ -1,0 +1,100 @@
+/* OSWEL'S TRAP — manette.css : l'apparence de la manette à distance (manette.html)
+   Pensée pour un téléphone tenu à l'horizontale, mais marche aussi en vertical et sur PC. */
+:root {
+  --fond: #120d0b; --carte: rgba(30, 24, 22, 0.94); --ligne: rgba(237, 228, 214, 0.18);
+  --texte: #ede4d6; --doux: #a8998a; --orange: #ffb347; --cyan: #5fd4ff; --joueur: #9c8f80;
+  --titre: 'Bungee', 'Impact', 'Arial Black', sans-serif;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; background: var(--fond); color: var(--texte); font-family: 'Chakra Petch', system-ui, sans-serif; overflow: hidden; }
+body { touch-action: none; user-select: none; -webkit-user-select: none; overscroll-behavior: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.vue { position: fixed; inset: 0; display: grid; place-items: center; padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+.vue[hidden] { display: none; }
+
+/* ---------- cartes : connexion et choix du joueur ---------- */
+.carte { width: min(420px, 100%); max-height: 100%; overflow: auto; background: var(--carte); border: 1px solid var(--ligne); border-radius: 16px; padding: 18px; display: grid; gap: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); touch-action: pan-y; }
+.carte.large { width: min(640px, 100%); }
+.logo { font-family: var(--titre); font-size: 2rem; line-height: 0.9; display: grid; text-align: center; color: var(--orange); }
+.logo span:last-child { color: var(--texte); }
+.sous { margin: 0; text-align: center; color: var(--doux); }
+h2 { margin: 0; text-align: center; font-family: var(--titre); font-weight: 400; color: var(--orange); }
+label { display: grid; gap: 4px; font-size: 0.9rem; color: var(--doux); }
+input { font: inherit; font-size: 1.1rem; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--ligne); background: rgba(0,0,0,0.35); color: var(--texte); user-select: text; -webkit-user-select: text; }
+input:focus { outline: none; border-color: var(--cyan); }
+.gros { padding: 14px; border: 0; border-radius: 12px; font-family: var(--titre); font-size: 1.15rem; background: linear-gradient(180deg, #ffb347, #ff8a2b); color: #1a0e06; }
+.moyen { padding: 10px 12px; border: 1px solid var(--ligne); border-radius: 12px; background: rgba(255,255,255,0.05); display: grid; gap: 2px; text-align: center; }
+.moyen small { color: var(--doux); font-size: 0.78rem; }
+.etat { margin: 0; min-height: 1.2em; text-align: center; color: var(--cyan); }
+.astuce { margin: 0; font-size: 0.8rem; color: var(--doux); text-align: center; }
+.retour { color: var(--doux); text-align: center; text-decoration: underline; cursor: pointer; }
+.places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.place { padding: 14px 10px; border-radius: 14px; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 18%, transparent); display: grid; gap: 4px; text-align: center; }
+.place b { font-family: var(--titre); font-weight: 400; font-size: 1.1rem; color: var(--c); }
+.place small { color: var(--doux); }
+.place.prise { opacity: 0.45; }
+.place.moi { box-shadow: 0 0 0 3px var(--c), 0 0 20px var(--c); }
+
+/* ---------- la manette ---------- */
+#vue-manette { display: block; padding: 0; }
+.barre { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 6px; padding: max(6px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left)); z-index: 3; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.45); border: 2px solid var(--joueur); }
+.badge i { width: 12px; height: 12px; border-radius: 50%; background: var(--joueur); box-shadow: 0 0 10px var(--joueur); }
+.badge b { font-family: var(--titre); font-weight: 400; font-size: 0.9rem; letter-spacing: 0.03em; color: var(--joueur); }
+.ping { font-size: 0.75rem; color: #3cff9a; }
+.ping.lent { color: #ffcc33; } .ping.mauvais { color: #ff5533; }
+.espace { flex: 1; }
+.mini { min-width: 36px; height: 32px; padding: 0 8px; border-radius: 9px; border: 1px solid var(--ligne); background: rgba(0,0,0,0.35); font-size: 0.95rem; display: inline-grid; place-items: center; text-decoration: none; color: var(--texte); }
+.mini.opt { font-size: 0.7rem; letter-spacing: 0.05em; }
+.mini.on, .mini.appui { background: rgba(255,179,71,0.4); border-color: var(--orange); }
+
+/* joystick : il apparaît là où le pouce se pose (moitié gauche) */
+.zone-stick { position: absolute; left: 0; top: 48px; bottom: 0; width: 46%; z-index: 2; }
+.stick-base { position: absolute; width: 132px; height: 132px; margin: -66px 0 0 -66px; left: 24%; top: 62%; border-radius: 50%; border: 2px solid rgba(237,228,214,0.35); background: radial-gradient(circle, rgba(255,255,255,0.08), rgba(0,0,0,0.35)); }
+.stick-knob { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff8, var(--joueur)); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+.zone-stick .indice { position: absolute; left: 10%; bottom: 8px; margin: 0; font-size: 0.75rem; color: var(--doux); pointer-events: none; }
+.zone-stick.actif .indice { display: none; }
+
+/* les 4 boutons en losange, comme sur la manette PS4 */
+.zone-boutons { position: absolute; right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: min(250px, 38vw); aspect-ratio: 1; z-index: 2; }
+.bt { position: absolute; width: 36%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--bc); background: rgba(0,0,0,0.3); display: grid; place-items: center; align-content: center; gap: 0; touch-action: none; }
+.bt.vide { display: none; }
+.bt span { font-size: clamp(1.6rem, 6vw, 2.4rem); line-height: 1; color: var(--bc); }
+.bt small { font-size: 0.62rem; letter-spacing: 0.05em; color: var(--texte); opacity: 0.85; min-height: 0.8em; }
+.bt.appui { background: color-mix(in srgb, var(--bc) 45%, transparent); transform: scale(0.93); }
+.b-tri { --bc: #3cd6a0; left: 32%; top: 0; }
+.b-car { --bc: #ff7ac8; left: 0; top: 32%; }
+.b-ron { --bc: #ff5a5a; right: 0; top: 32%; }
+.b-cro { --bc: #7aa8ff; left: 32%; bottom: 0; width: 38%; }
+.aide-clavier { position: absolute; left: 0; right: 0; bottom: 6px; margin: 0; text-align: center; font-size: 0.78rem; color: var(--doux); z-index: 2; pointer-events: none; }
+
+/* l'image du jeu : les commandes deviennent plus petites et transparentes pour la laisser voir */
+#ecran { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 0; }
+.barre, .zone-stick, .zone-boutons, .stick-base { transition: opacity 0.35s; }
+.stick-base { opacity: 0.5; }
+.zone-stick.actif .stick-base { opacity: 1; }
+body.video .zone-boutons { width: min(205px, 31vw); opacity: 0.55; }
+body.video .stick-base { background: rgba(0,0,0,0.15); width: 112px; height: 112px; margin: -56px 0 0 -56px; }
+body.video .barre { opacity: 0.6; }
+body.video .ping, body.video .indice { display: none; }
+/* au repos (on ne touche plus l'écran depuis 2,5 s) : presque invisibles */
+body.repos .zone-boutons, body.repos .stick-base { opacity: 0.25; }
+body.repos .barre { opacity: 0.35; }
+body.repos.video .zone-boutons, body.repos.video .stick-base { opacity: 0.16; }
+
+/* téléphone tenu à la verticale : l'image en haut, les commandes en bas */
+@media (orientation: portrait) {
+  .zone-stick { top: 55%; width: 50%; }
+  .stick-base { top: 60%; left: 40%; }
+  .zone-boutons { width: min(230px, 46vw); }
+  body.video #ecran { height: 52%; }
+  body.video .zone-stick, body.video .zone-boutons { opacity: 1; }
+}
+
+.voile { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: rgba(10,7,6,0.82); text-align: center; padding: 20px; }
+.voile[hidden] { display: none; }
+.voile b { font-family: var(--titre); font-weight: 400; font-size: 1.3rem; color: var(--orange); }
+.voile p { color: var(--texte); max-width: 420px; }
+.bulle { position: fixed; left: 50%; top: 56px; transform: translateX(-50%); z-index: 9; padding: 8px 14px; border-radius: 10px; background: rgba(0,0,0,0.8); border: 1px solid var(--ligne); font-size: 0.9rem; max-width: 90vw; text-align: center; }
+.bulle[hidden] { display: none; }

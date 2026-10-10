@@ -1,0 +1,237 @@
+RAPPORT DE COMPRÉHENSION DES VOIX — mots retrouvés par la reconnaissance vocale
+(100 % = tous les mots retrouvés ; les voix à effets ont naturellement un score plus bas)
+
+PAR PERSONNAGE
+  charly            4 répliques    83.8 % de mots retrouvés
+  ia                1 répliques    78.9 % de mots retrouvés
+  bug               5 répliques    73.0 % de mots retrouvés
+  franck           50 répliques    72.6 % de mots retrouvés
+  echo              4 répliques    71.5 % de mots retrouvés
+  ashley            7 répliques    70.4 % de mots retrouvés
+  brayan           16 répliques    67.6 % de mots retrouvés
+  francheska       23 répliques    66.2 % de mots retrouvés
+  nexa             55 répliques    65.0 % de mots retrouvés
+  meka             36 répliques    65.0 % de mots retrouvés
+  samuel           12 répliques    64.4 % de mots retrouvés
+  chapitre         30 répliques    64.2 % de mots retrouvés
+  peck              7 répliques    62.7 % de mots retrouvés
+  yannick          17 répliques    61.8 % de mots retrouvés
+  kevin            12 répliques    61.1 % de mots retrouvés
+  romeo             8 répliques    61.0 % de mots retrouvés
+  oswel            79 répliques    60.3 % de mots retrouvés
+  winblack          7 répliques    59.7 % de mots retrouvés
+  patou            43 répliques    59.5 % de mots retrouvés
+  tsague           10 répliques    59.5 % de mots retrouvés
+  fredo            50 répliques    59.3 % de mots retrouvés
+  tchanko          14 répliques    59.0 % de mots retrouvés
+  reine             9 répliques    59.0 % de mots retrouvés
+  lionnel          10 répliques    59.0 % de mots retrouvés
+  kellia           16 répliques    58.2 % de mots retrouvés
+  youmbi           12 répliques    58.2 % de mots retrouvés
+  reinedamso        6 répliques    58.1 % de mots retrouvés
+  isaie            17 répliques    57.0 % de mots retrouvés
+  annie            10 répliques    56.2 % de mots retrouvés
+  junior           14 répliques    55.7 % de mots retrouvés
+  godlove          50 répliques    55.7 % de mots retrouvés
+  christine        22 répliques    54.6 % de mots retrouvés
+  ange             19 répliques    54.6 % de mots retrouvés
+  danie             8 répliques    54.1 % de mots retrouvés
+  dimi             11 répliques    53.4 % de mots retrouvés
+  nadia            12 répliques    53.2 % de mots retrouvés
+  valdes           58 répliques    53.1 % de mots retrouvés
+  tony            101 répliques    53.0 % de mots retrouvés
+  tante             9 répliques    52.0 % de mots retrouvés
+  zeus             17 répliques    51.9 % de mots retrouvés
+  machine           5 répliques    50.5 % de mots retrouvés
+  sandex            5 répliques    49.8 % de mots retrouvés
+  belvianne         5 répliques    48.8 % de mots retrouvés
+  ladyannee         8 répliques    48.4 % de mots retrouvés
+  narrateur        20 répliques    45.9 % de mots retrouvés
+  byte             36 répliques    45.3 % de mots retrouvés
+  rumeur          107 répliques    36.5 % de mots retrouvés
+  annonceur        34 répliques    36.0 % de mots retrouvés
+  gardien           4 répliques    15.0 % de mots retrouvés
+
+  TOTAL          1115 répliques    55.6 %
+
+LES RÉPLIQUES LES MOINS BIEN COMPRISES (à réécouter)
+    0.0 %  narrateur/f44e2309
+      texte  : Douala.
+      entendu: doi le
+    0.0 %  byte/32b2913f
+      texte  : Alerte pixel !
+      entendu: à l'art et
+    0.0 %  tony/b568be29
+      texte  : Logique.
+      entendu: le g
+    0.0 %  valdes/e410f144
+      texte  : Je vérifie… piège confirmé.
+      entendu: je vais le fi qui a je confirme
+    0.0 %  nexa/a4c41fee
+      texte  : Maintenant. Cours.
+      entendu: martin and co
+    0.0 %  meka/53982107
+      texte  : Cible neutralisée.
+      entendu: si plus neutralisa
+    0.0 %  byte/88ad63c7
+      texte  : Ouch, bug !
+      entendu: ou ce but
+    0.0 %  byte/b8fa44eb
+      texte  : Checkpoint ! Sauvegarde OK.
+      entendu: chaque pointe sauvegarde ou que
+    0.0 %  tony/7d4f4345
+      texte  : Un passage secret !
+      entendu: la passe à sec
+    0.0 %  rumeur/935e3fe6
+      texte  : Il paraît que www.osweI.cm et www.oswel.cm, c'est pareil.
+      entendu: il va régler double le double pont aux estables deux images les rangers double meilleure vedette et par
+    0.0 %  annonceur/ac9c3ea2
+      texte  : Mini-jeu numéro neuf !
+      entendu: je ne me rends la
+    0.0 %  nadia/85171299
+      texte  : File ! Le ndolé t'attendra.
+      entendu: si l'une d'elle est attendra
+    0.0 %  belvianne/ac099fb1
+      texte  : « mur.solide = false » : ce mur, tu peux le traverser.
+      entendu: mur point de cali de gale fond ses murs du peut le traverser
+    0.0 %  danie/e85981d1
+      texte  : Saute par-dessus le premier portail : le bon est le deuxième, 192.168.1.7.
+      entendu: cette part de si le premier portail le bon et le deuxième sans quatre vingt douze pointe cent soixante huit pointes point cette
+    0.0 %  gardien/f8fbcf1e
+      texte  : DÉMONTE-MOI SI TU PEUX.
+      entendu: de situ peu
+    0.0 %  gardien/32f9f765
+      texte  : ÉCOUTE. UN SEUL CŒUR BAT VRAIMENT.
+      entendu: la seule corbara ment
+    0.0 %  gardien/349378cf
+      texte  : TU N'AS PLUS BESOIN DE MOI.
+      entendu: le
+    0.0 %  oswel/aa9c0414
+      texte  : Ces plateformes bougent quand on bouge…
+      entendu: c'est à devant bouche canton
+    0.0 %  rumeur/f87ed328
+      texte  : On m'a dit que tous les interrupteurs se ressemblent.
+      entendu: la laque nouvel intérieur semble
+    0.0 %  bug/82a75497
+      texte  : ESSAIE DONC DE M'ATTRAPER.
+      entendu: et c'est donc de mettre appel
+    0.0 %  rumeur/42fc315e
+      texte  : 2 > 3 ? Évidemment que c'est vrai.
+      entendu: deux supérieurs à trois ligaments eva
+    0.0 %  machine/aa7fa8d5
+      texte  : ÉPREUVE 3 : INGÉNIERIE.
+      entendu: le pres toises ingénierie
+    0.0 %  rumeur/4969d58e
+      texte  : Pair ? Il y a 2 nombres pairs sur un dé. Donc c'est 2.
+      entendu: la de son repère sera dont on sait que
+    0.0 %  rumeur/e86f371b
+      texte  : VRAI ET FAUX, ça fait VRAI. À moitié vrai, c'est vrai.
+      entendu: tipo ciao de dole sevran
+    0.0 %  narrateur/51c8a000
+      texte  : Bienvenue dans le Nexus.
+      entendu: in dentelés
+    0.0 %  winblack/1bfc1287
+      texte  : Écarte-toi. BLACKOUT.
+      entendu: les cartes toi black
+    0.0 %  winblack/e8b9036e
+      texte  : Tu tombes, tu analyses, tu recommences. BLACKOUT.
+      entendu: ton que analyse du recommence place ou
+    0.0 %  rumeur/4528e270
+      texte  : Pas besoin de sauvegarder. Fonce, ça ira.
+      entendu: souvenons sara
+    0.0 %  rumeur/94880a07
+      texte  : Le code source, c'est secret. Fais confiance aux panneaux.
+      entendu: son sous ce que votre seconde contient son panon
+    0.0 %  rumeur/1b836feb
+      texte  : QUATRE PORTES. UNE SEULE DIT VRAI. LAQUELLE ?
+      entendu: report les autres manage
+    0.0 %  rumeur/e99844b6
+      texte  : ON DIT QUE… … …
+      entendu: 
+    0.0 %  tchanko/fa5f6c9f
+      texte  : [object Object]
+      entendu: objet objet
+    0.0 %  rumeur/911103d4
+      texte  : On dit que tu vas échouer.
+      entendu: 
+    0.0 %  christine/7bbad391
+      texte  : Tu l'as fait.
+      entendu: la fête
+    0.0 %  rumeur/a36f9c3c
+      texte  : On dit que… on dit que… tout s'effondre…
+      entendu: délice endémique toutes ses fours
+    0.0 %  annonceur/284d8117
+      texte  : Mini-jeu numéro un !
+      entendu: ingeniero
+    0.0 %  annonceur/ee317040
+      texte  : Mini-jeu numéro sept !
+      entendu: nigel le recette
+    0.0 %  annonceur/d23ce986
+      texte  : Mini-jeu numéro huit !
+      entendu: ingeniero 
+    0.0 %  annonceur/bbe3d787
+      texte  : Boum !
+      entendu: 
+    0.0 %  annonceur/16838257
+      texte  : Patate chaude !
+      entendu: 
+    0.0 %  annonceur/4fb39a46
+      texte  : Vole-moi ça !
+      entendu: vamos
+    0.0 %  annonceur/fae78274
+      texte  : Chaos magnétique !
+      entendu: carman utique
+    0.0 %  annonceur/b8219918
+      texte  : Piège-moi si tu peux !
+      entendu: cistude
+    0.0 %  annonceur/5ab54aef
+      texte  : Panne générale !
+      entendu: général
+    0.0 %  annonceur/d808d3dc
+      texte  : Deux !
+      entendu: de
+    0.0 %  annonceur/5296dca0
+      texte  : Partez !
+      entendu: arte
+    0.0 %  annonceur/504ca258
+      texte  : Manche deux !
+      entendu: monde
+    0.0 %  annonceur/b0f44ee4
+      texte  : Manche quatre !
+      entendu: tre
+    0.0 %  annonceur/e213fef7
+      texte  : Dernière manche !
+      entendu: dernièrement
+    0.0 %  annonceur/1c9ebd48
+      texte  : Temps écoulé !
+      entendu: coulée
+    0.0 %  annonceur/88586335
+      texte  : Dix secondes !
+      entendu: de son
+    0.0 %  annonceur/67315e20
+      texte  : Mort subite !
+      entendu: suit
+    0.0 %  oswel/913e1c98
+      texte  : Attends…
+      entendu: 
+    0.0 %  tony/2279b257
+      texte  : Observe avant d'agir.
+      entendu: servage
+    0.0 %  fredo/da2a91a2
+      texte  : Ça sonne faux, ça…
+      entendu: ça se ne faut sa
+    0.0 %  oswel/f181f4ce
+      texte  : Non…
+      entendu: 
+    0.0 %  oswel/4bd36e91
+      texte  : Mais c'est quoi ce niveau ?!
+      entendu: cette croisade
+    0.0 %  oswel/20c705bf
+      texte  : AH !
+      entendu: 
+    0.0 %  byte/c227adbf
+      texte  : Bug détecté… c'était moi.
+      entendu: deux que détecter c'est de moi
+    0.0 %  godlove/08c193d0
+      texte  : Aïe… ça pique le cœur.
+      entendu: a capitule par

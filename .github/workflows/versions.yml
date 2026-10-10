@@ -1,0 +1,90 @@
+# =====================================================================
+# OSWEL'S TRAP — fabrication automatique des versions (GitHub Actions)
+# À chaque envoi (push) sur GitHub, ou à la main (onglet « Actions » →
+# « Fabriquer les versions » → Run workflow), GitHub fabrique :
+#   - l'application Android (.apk)            → job « android »
+#   - l'installeur Windows (.exe) + le .zip    → job « pc » (windows)
+#   - Linux : AppImage, paquet pacman (CachyOS / Arch) et .deb → job « pc » (linux)
+# Les fichiers se téléchargent en bas de la page du « run » (Artifacts).
+# Avec une étiquette de version (ex. git tag v1.5.0 && git push --tags),
+# ils sont aussi publiés dans une « Release ».
+# =====================================================================
+name: Fabriquer les versions
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - name: Préparer le projet Android
+        working-directory: mobile
+        run: |
+          npm ci
+          node ../bureau/preparer.js ../mobile/www
+          npx cap sync android
+      - name: Fabriquer l'APK
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+          mkdir -p ../../sortie
+          cp app/build/outputs/apk/debug/app-debug.apk ../../sortie/Oswels-Trap-1.5.0-android.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: oswels-trap-android, path: sortie/*.apk }
+      - if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with: { files: sortie/*.apk }
+
+  pc:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            cible: --win nsis zip
+          - os: ubuntu-latest
+            cible: --linux AppImage pacman deb
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libarchive-tools
+      - name: Fabriquer la version PC
+        working-directory: bureau
+        shell: bash
+        run: |
+          npm ci
+          node preparer.js
+          npx electron-builder ${{ matrix.cible }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oswels-trap-${{ runner.os }}
+          path: |
+            bureau/dist/*.exe
+            bureau/dist/*.zip
+            bureau/dist/*.AppImage
+            bureau/dist/*.pacman
+            bureau/dist/*.deb
+      - if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            bureau/dist/*.exe
+            bureau/dist/*.zip
+            bureau/dist/*.AppImage
+            bureau/dist/*.pacman
+            bureau/dist/*.deb

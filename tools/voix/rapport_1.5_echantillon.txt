@@ -1,0 +1,236 @@
+RAPPORT DE COMPRÉHENSION DES VOIX — mots retrouvés par la reconnaissance vocale
+(100 % = tous les mots retrouvés ; les voix à effets ont naturellement un score plus bas)
+
+PAR PERSONNAGE
+  ia                1 répliques   100.0 % de mots retrouvés
+  junior            2 répliques    97.2 % de mots retrouvés
+  charly            2 répliques    92.9 % de mots retrouvés
+  peck              2 répliques    85.7 % de mots retrouvés
+  brayan            2 répliques    85.0 % de mots retrouvés
+  belvianne         2 répliques    84.5 % de mots retrouvés
+  chapitre          2 répliques    83.5 % de mots retrouvés
+  echo              2 répliques    83.3 % de mots retrouvés
+  kevin             2 répliques    77.1 % de mots retrouvés
+  tsague            2 répliques    76.3 % de mots retrouvés
+  meka              2 répliques    75.0 % de mots retrouvés
+  reine             2 répliques    75.0 % de mots retrouvés
+  reinedamso        2 répliques    75.0 % de mots retrouvés
+  nadia             2 répliques    73.7 % de mots retrouvés
+  danie             2 répliques    72.2 % de mots retrouvés
+  winblack          2 répliques    72.0 % de mots retrouvés
+  sandex            2 répliques    71.6 % de mots retrouvés
+  tante             2 répliques    71.2 % de mots retrouvés
+  bug               2 répliques    70.8 % de mots retrouvés
+  francheska        2 répliques    69.4 % de mots retrouvés
+  kellia            2 répliques    69.2 % de mots retrouvés
+  yannick           2 répliques    68.5 % de mots retrouvés
+  machine           2 répliques    66.7 % de mots retrouvés
+  ladyannee         2 répliques    64.1 % de mots retrouvés
+  nexa              2 répliques    62.5 % de mots retrouvés
+  fredo             2 répliques    61.9 % de mots retrouvés
+  franck            2 répliques    60.3 % de mots retrouvés
+  lionnel           2 répliques    59.8 % de mots retrouvés
+  patou             2 répliques    59.6 % de mots retrouvés
+  romeo             2 répliques    57.1 % de mots retrouvés
+  ange              2 répliques    55.6 % de mots retrouvés
+  christine         2 répliques    53.3 % de mots retrouvés
+  dimi              2 répliques    52.5 % de mots retrouvés
+  youmbi            2 répliques    51.6 % de mots retrouvés
+  byte              2 répliques    50.0 % de mots retrouvés
+  zeus              2 répliques    50.0 % de mots retrouvés
+  ashley            2 répliques    48.5 % de mots retrouvés
+  tchanko           2 répliques    41.3 % de mots retrouvés
+  tony              2 répliques    40.0 % de mots retrouvés
+  annonceur         2 répliques    37.5 % de mots retrouvés
+  godlove           2 répliques    37.5 % de mots retrouvés
+  samuel            2 répliques    35.7 % de mots retrouvés
+  isaie             2 répliques    33.3 % de mots retrouvés
+  rumeur            2 répliques    33.3 % de mots retrouvés
+  valdes            2 répliques    33.3 % de mots retrouvés
+  annie             2 répliques    29.4 % de mots retrouvés
+  oswel             2 répliques    13.6 % de mots retrouvés
+  gardien           2 répliques     0.0 % de mots retrouvés
+
+  TOTAL            95 répliques    60.4 %
+
+LES RÉPLIQUES LES MOINS BIEN COMPRISES (à réécouter)
+    0.0 %  annonceur/2b51ad6d
+      texte  : Mini-jeu numéro cinq !
+      entendu: nigel resin
+    0.0 %  byte/00ff5ed4
+      texte  : Aplati comme un sprite 2D !
+      entendu: place inscrit
+    0.0 %  gardien/2b2405c8
+      texte  : MON ÉQUILIBRE… !
+      entendu: mi élire
+    0.0 %  gardien/347aa6f1
+      texte  : Grrr… bien visé.
+      entendu: devise
+    0.0 %  oswel/20a3d860
+      texte  : Attends… c'est nouveau, ça !
+      entendu: en ce neveu a
+    0.0 %  samuel/2474bae1
+      texte  : On grimpe en zigzag.
+      entendu: de la tania
+    0.0 %  tony/2d9a5456
+      texte  : BOUM…
+      entendu: 
+    0.0 %  valdes/610a475c
+      texte  : Ça vient d'en haut !
+      entendu: ces de donc
+    0.0 %  zeus/5fa28684
+      texte  : Tu as appris ça où ?
+      entendu: tua aprica
+   11.1 %  rumeur/a36f9c3c
+      texte  : On dit que… on dit que… tout s'effondre…
+      entendu: dion de que de ses fans
+   11.1 %  tchanko/c14bf804
+      texte  : Les pistons préviennent : ils tremblent juste avant de frapper.
+      entendu: le piston prégent il tremble justement de frappes
+   14.3 %  annie/98152e5c
+      texte  : La scie se lance quand tu passes.
+      entendu: la silence tendu par 
+   20.0 %  ashley/584b13db
+      texte  : Plus loin, dans « L'idée ».
+      entendu: plus loin d'un le dé
+   25.0 %  godlove/d914c310
+      texte  : Je l'ai eu !
+      entendu: je les yeux
+   25.0 %  nexa/a5390b35
+      texte  : Gauche… c'est droite ?!
+      entendu: gauche ses draps
+   27.3 %  oswel/9ec3a67b
+      texte  : Je peux sauter en l'air ici ! Petits coups d'aile…
+      entendu: je peux sauter un hérisse petit coude
+   31.6 %  christine/78ebba9d
+      texte  : Cours sans t'arrêter le long des bidons, et saute le trou qui suit dès que tu y arrives.
+      entendu: consent arête le long des bidons et saut les troupes des coteries
+   33.3 %  isaie/84f61641
+      texte  : Plus loin, dans « La vraie sortie ».
+      entendu: plus loin par et sorti
+   33.3 %  isaie/8511c481
+      texte  : Les tapis te tirent en arrière : cours, et saute vers l'avant.
+      entendu: l'étape de tire de en arrière pour et sauter l'avant
+   33.3 %  machine/4637689e
+      texte  : EXAMEN… RÉUSSI. FÉLICITATIONS.
+      entendu: examen réussit félicitation
+   36.4 %  lionnel/4d03c91a
+      texte  : Les toits d'OSWEL City, tout en haut. Atteins la SORTIE.
+      entendu: les pois d'eau soul city tout en eau adela sorti
+   38.5 %  kellia/66e50363
+      texte  : Leur œil rougit et bipe avant chaque tir : saute par-dessus le tir.
+      entendu: leurs eroge délits avant chaque tir sauter dessus le tie
+   42.3 %  tante/53ccdf11
+      texte  : Les blocs rouillés s'effondrent peu après qu'on s'y pose : enchaîne les sauts sans t'arrêter dessus. Les piliers gris sont sûrs : souffle là.
+      entendu: les blocs rouillés s'effondrent peu après concise enchaînent les son sens arrête de sus les quiller gris son sur souffre la
+   42.9 %  franck/d401909a
+      texte  : Des plateformes automatiques au-dessus des pics.
+      entendu: des plateformes automatiques de cinétiques
+   44.4 %  ange/d917c552
+      texte  : Cette corniche est trop haute pour un seul saut.
+      entendu: cette corniche trop pote pour en seule sous
+   44.4 %  annie/d917c552
+      texte  : Cette corniche est trop haute pour un seul saut.
+      entendu: cette corne cette trompe de pour un seul son
+   44.4 %  danie/8d8a25bb
+      texte  : Tu marches au plafond au-dessus d'une fosse de pics ; attention au pic du plafond au milieu.
+      entendu: tu marches au plafond ou de sus d'une fois le pic attention aux pide plafond to milieu
+   45.0 %  dimi/9074aec7
+      texte  : Les plateformes fantômes disparaissent si on s'y arrête plus d'un instant. En bas, les îlots gris sont sûrs.
+      entendu: les pères forme fantôme disparaissent si paraît plus d'un instant en pas les îlots que ressons sur
+   46.2 %  youmbi/b61b02cc
+      texte  : Avance, et dès que l'œil rougit, saute au-dessus de la boule.
+      entendu: avance et de que le rougi sauta de sud de la boule
+   47.4 %  nadia/62163799
+      texte  : Cours et saute au bord de chaque toit ; sur la grue, attends qu'elle s'approche du toit suivant.
+      entendu: cor et catobar de chaque toit sur la grue attend que sa proche du toi suivant
+   48.1 %  ladyannee/c80dabc4
+      texte  : La fausse a un tourbillon qui tourne à l'envers ; la piégée a une lumière rouge pâle (elle renvoie en arrière) ; la vraie a une lumière bleue.
+      entendu: la fausse a tourbillon qui tombe la lorelai reine numerous parle elle renvoie un arrière la vente à lumière bleue
+   50.0 %  godlove/b2cba1d9
+      texte  : Le laser…
+      entendu: le lac
+   50.0 %  meka/df679b03
+      texte  : C'est fini… enfin.
+      entendu: ces fini enfin
+   50.0 %  reinedamso/ce920334
+      texte  : Deux chemins : en haut, rapide ; en bas, sûr.
+      entendu: de chemin en eucratide en bas sur
+   53.6 %  yannick/88618a32
+      texte  : Le chemin du haut a des pics et des blocs rouillés mais plus de pièces ; celui du bas est plus long, avec une petite fosse. Ils se rejoignent.
+      entendu: le chemin du haut des piqués de bloc rouille puis de pièces celui du bas et long avec une petite fosse il se rejoint le
+   55.6 %  francheska/da91f63a
+      texte  : Appuie sur le bouton, attends « 0 erreur », puis traverse.
+      entendu: appui sur le bouton a tenté rohrer puis traverse
+   55.6 %  patou/a3d608e3
+      texte  : Ne t'arrête pas et ne reviens pas : saute les obstacles en courant jusqu'à la zone sûre.
+      entendu: le dart pas le revient pas saute les obstacles en courant jusqu'à la saône sur
+   55.6 %  rumeur/56f491e3
+      texte  : ET SI LE SOL SE DÉROBAIT SOUS TES PIEDS ?
+      entendu: si le sol se déroulait sous les plis
+   57.1 %  fredo/d401909a
+      texte  : Des plateformes automatiques au-dessus des pics.
+      entendu: des plateformes automatiques au des de pic
+   57.1 %  romeo/06cd22aa
+      texte  : Une fente dans le sol, plus loin…
+      entendu: une fondant le sol plus la
+   57.1 %  romeo/4ea5a2dc
+      texte  : Et plus loin, dans « Ne pas ouvrir ».
+      entendu: et plus loin dans ce pari
+   57.1 %  youmbi/6d65e369
+      texte  : Quand tu te poses sur la 3e, la 4e glisse d'une case et demie : regarde-la bouger avant de sauter.
+      entendu: quand tu te pose soulage l'âge du est une case et demi regarde la bouger avant de sauter
+   60.0 %  dimi/2d288449
+      texte  : Monte et redescends l'escalier au-dessus de l'acide, puis passe sous les lasers.
+      entendu: monte re de sant l'escalier au dessus de la cide puis passe sous les lazes
+   63.2 %  sandex/4e92d24b
+      texte  : Les corniches sont à gauche puis à droite : saute de l'une à l'autre en visant leur milieu.
+      entendu: les corniches sont accouche plus adroite saute de l'une à l'autre en visant l'armée
+   63.6 %  patou/dff70f82
+      texte  : Les bidons explosent un peu après qu'on s'en approche.
+      entendu: les bidons explosent un peu après consent approche
+   64.0 %  winblack/4ad8ded7
+      texte  : On dit que les ignorants sont plus heureux que les savants. Moi, je réponds : le savoir est une arme, alors il me faut des munitions.
+      entendu: dit que les ignorants sont plus peureux que les savants moi je réponds le savoir régénère alors une fau de munitions
+   66.7 %  ange/e3e9f3cf
+      texte  : Pousse la caisse devant toi : elle arrête le rayon.
+      entendu: pousse la caste ventouse elle arrête le rayon
+   66.7 %  bug/b3832bc9
+      texte  : Je suis une fonc… une fonctionnalité…
+      entendu: je suis lis une fonte une fonctionnalité
+   66.7 %  echo/925c799b
+      texte  : Pourquoi tout clignote ?
+      entendu: pourquoi toute clignote
+   66.7 %  fredo/00640ec3
+      texte  : Pas en bas !
+      entendu: par en bas
+   66.7 %  kevin/52170144
+      texte  : Au-dessus des trous, le vent te ralentit : saute plus tôt et garde la direction.
+      entendu: au dessus des trous le vent ralenti sotte plutôt et garde la direction
+   66.7 %  reine/e3e9f3cf
+      texte  : Pousse la caisse devant toi : elle arrête le rayon.
+      entendu: la cas devant toi elle rate le rayon
+   66.7 %  valdes/82d8f0a7
+      texte  : Et plus loin, dans « Le push ».
+      entendu: plus loin dans le plus
+   69.0 %  belvianne/d479b1fb
+      texte  : La fausse pièce ne flotte pas et tourne à l'envers : la prendre fait s'effondrer le sol. Les vraies pièces sont plus haut, à gauche et à droite.
+      entendu: la fosse cesse ne flotte pas et tourne à l'envers la prendre un set épandre les sols les repères sont plus haut à gauche et à droite
+   69.2 %  tsague/66e50363
+      texte  : Leur œil rougit et bipe avant chaque tir : saute par-dessus le tir.
+      entendu: le re rougis et bit avant chaque tir saute par dessus le tir
+   70.0 %  brayan/3c0fbe37
+      texte  : Traverse la page corrompue et rattrape la porte qui disparaît.
+      entendu: traverse la page corrompu les rattrape la porte le disparaît
+   71.4 %  peck/1a9aaab8
+      texte  : En bas, un grand mur bloque. À l'étage, sortir par le bord GAUCHE te fait revenir par le bord DROIT.
+      entendu: en ne pas un grand mur bloc à l'étage sortir par le bord buche de fête revenir par le bord droit
+   71.4 %  samuel/44e19e2a
+      texte  : Plus loin, dans « Le pied de page ».
+      entendu: loin dans le pied de par
+   71.4 %  tchanko/6fd1d49c
+      texte  : Et plus loin, dans « Le court-circuit ».
+      entendu: le plus loin dans le cours circuit
+   74.1 %  chapitre/b6588375
+      texte  : Puis j'ai découvert la mécatronique. Sous le métal, il y avait des câbles, des capteurs, des circuits. Quelque chose décidait à la place de la machine.
+      entendu: découvert métatron sous le métal il y avait des cables de capteurs des circuits quelque chose décidée à la place de la machine

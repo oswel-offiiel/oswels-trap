@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Oswel's Trap : la couleur de fond du jeu (pendant le chargement) -->
+    <color name="fondJeu">#120D0B</color>
+</resources>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<!-- OSWEL'S TRAP — la MANETTE à distance (version 1.5, réseau local).
+     Ouverte sur un téléphone ou un autre PC du même Wi-Fi, elle se connecte au PC
+     qui héberge la partie et devient une manette : joystick, ✕ ○ □ △, OPTIONS,
+     vibrations, et l'image du jeu en direct si on le veut. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#120d0b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Oswel's Trap — Manette</title>
+<link rel="icon" href="img/icon-192.png">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/manette.css">
+</head>
+<body>
+<!-- l'image du jeu (vidéo en direct depuis le PC hôte), sous les commandes -->
+<video id="ecran" playsinline autoplay muted hidden></video>
+
+<!-- 1) CONNEXION -->
+<section id="vue-connexion" class="vue">
+  <div class="carte">
+    <div class="logo"><span>OSWEL'S</span><span>TRAP</span></div>
+    <p class="sous">Manette réseau local</p>
+    <label>Ton pseudo<input id="pseudo" type="text" maxlength="16" autocomplete="nickname" placeholder="ex. Franck"></label>
+    <label id="ligne-adresse">Adresse du PC hôte<input id="adresse" type="text" inputmode="url" autocomplete="off" placeholder="ex. 192.168.1.12"></label>
+    <button id="btn-connecter" class="gros">Se connecter</button>
+    <p id="etat-connexion" class="etat"></p>
+    <p class="astuce">Tous les appareils doivent être sur le <b>même Wi-Fi</b> (ou le partage de connexion d'un téléphone).</p>
+    <a id="lien-retour1" class="retour" hidden>↩ Retour au jeu</a>
+  </div>
+</section>
+
+<!-- 2) CHOIX DU JOUEUR -->
+<section id="vue-places" class="vue" hidden>
+  <div class="carte large">
+    <h2>Choisis ton joueur</h2>
+    <p class="sous" id="nom-partie"></p>
+    <div id="places" class="places"></div>
+    <button id="btn-sans-place" class="moyen">Juste une manette<small>Soirée OSWEL, menus : tu rejoins en appuyant sur ✕</small></button>
+  </div>
+</section>
+
+<!-- 3) LA MANETTE -->
+<section id="vue-manette" class="vue" hidden>
+  <header class="barre">
+    <span id="badge" class="badge"><i></i><b id="badge-nom">JOUEUR</b></span>
+    <span id="ping" class="ping" title="Temps de réponse">●</span>
+    <span class="espace"></span>
+    <button id="btn-video" class="mini" title="Voir l'écran du jeu">📺</button>
+    <button id="btn-son" class="mini" title="Son de la vidéo" hidden>🔇</button>
+    <button id="btn-place" class="mini" title="Changer de joueur">⇄</button>
+    <button id="btn-plein" class="mini" title="Plein écran">⛶</button>
+    <button class="mini opt" data-b="9" title="Pause / menu">OPTIONS</button>
+    <a id="lien-retour2" class="mini" hidden title="Retour au jeu">↩</a>
+  </header>
+  <div id="zone-stick" class="zone-stick"><div class="stick-base" id="stick-base"><div class="stick-knob" id="stick-knob"></div></div><p class="indice">Joystick : pose le pouce ici</p></div>
+  <div id="zone-boutons" class="zone-boutons">
+    <button class="bt b-tri" data-b="3"><span>△</span><small data-l="3">ACTION</small></button>
+    <button class="bt b-car" data-b="2"><span>□</span><small data-l="2">COURIR</small></button>
+    <button class="bt b-ron" data-b="1"><span>○</span><small data-l="1"></small></button>
+    <button class="bt b-cro" data-b="0"><span>✕</span><small data-l="0">SAUT</small></button>
+  </div>
+  <p id="aide-clavier" class="aide-clavier" hidden>Clavier : ZQSD / flèches · Espace = ✕ · E = △ · Maj = □ · F = ○ · Échap = OPTIONS · une manette branchée marche aussi</p>
+</section>
+
+<div id="voile" class="voile" hidden><div><b id="voile-titre"></b><p id="voile-texte"></p><button id="voile-btn" class="moyen" hidden></button></div></div>
+<div id="bulle" class="bulle" hidden></div>
+
+<script src="js/manette.js"></script>
+</body>
+</html>
