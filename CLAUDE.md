@@ -82,9 +82,9 @@ mobile/                (1.5) application Android Capacitor (android/ = projet An
 .github/workflows/     (1.5) fabrication automatique Windows / Linux / Android
 audio/fr/characters/<personnage>/<code>.mp3   les voix
 sw.js, manifest.json   version installable / hors ligne
-site/                  (1.5) le site public oswels-trap.netlify.app : page de téléchargement (site/page/) + le jeu
-                       jouable dans le navigateur (/jouer/, pour iPhone, iPad, Mac), assemblés par site/construire.sh ;
-                       Netlify refait le site à chaque push sur main (netlify.toml). Voir site/LISEZMOI.md
+(site web)             le site public oswels-trap.netlify.app (page de téléchargement + le jeu jouable dans le
+                       navigateur, dossier jouer/ = copie du jeu faite avec bureau/preparer.js) est dans un AUTRE
+                       dépôt : oswel-offiiel/oswels-trap-site (relié à Netlify). Ne pas le mettre dans ce dépôt.
 serveur/               serveur Django facultatif (classement en ligne)
 tools/validation/      robots de test : valider.py (niveaux), minijeux.py (mini-jeux)
 tools/voix/            fabrication des voix (generer.py, voix.json, LISEZMOI.md)
@@ -133,9 +133,6 @@ node bureau/serveur-lan.js                     # réseau local sans Electron →
 cd mobile && npm install && npm run apk        # APK (il faut le SDK Android) — ou GitHub Actions
 ```
 Après une modification du jeu, `preparer.js` recopie le jeu dans `bureau/jeu` / `mobile/www` (fait par les scripts npm).
-Site web (1.5) : `bash site/construire.sh` → `site/public/` (page + jeu dans `jouer/`). `preparer.js` exclut `site/`
-et `netlify.toml` : le site n'entre jamais dans les versions PC / Android. Un push qui ne touche que `site/` ne relance
-pas la fabrication des versions (paths-ignore dans le workflow).
 
 ## La suite prévue
 - **Fait en 1.5 (finalisation)** : boss refaits (phases, signaux, contre-attaques), nouveaux pièges, réactions,

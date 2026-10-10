@@ -6,7 +6,6 @@ mobile/www/
 mobile/android/app/src/main/assets/public/
 mobile/android/app/build/
 mobile/android/.gradle/
-site/public/
 *.log
 
 # caches des outils (refaits automatiquement)
