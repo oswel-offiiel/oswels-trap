@@ -1,0 +1,315 @@
+/* =====================================================================
+   OSWEL'S TRAP — la page de téléchargement
+   Mêmes couleurs et mêmes polices que le jeu (Bungee pour les titres, Chakra Petch pour le texte).
+   Pensée d'abord pour le téléphone (la plupart des visiteurs arrivent par un lien partagé),
+   puis élargie pour l'ordinateur avec les @media plus bas.
+   ===================================================================== */
+
+/* ---------- 1. Les polices (fichiers dans fonts/, rien n'est chargé depuis internet) ---------- */
+@font-face { font-family: 'Bungee'; font-weight: 400; font-display: swap; src: url(../fonts/bungee-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Chakra Petch'; font-weight: 400; font-display: swap; src: url(../fonts/chakra-petch-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Chakra Petch'; font-weight: 600; font-display: swap; src: url(../fonts/chakra-petch-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Chakra Petch'; font-weight: 700; font-display: swap; src: url(../fonts/chakra-petch-latin-700-normal.woff2) format('woff2'); }
+/* (les lettres plus rares — Œ, ő… — viennent de la variante « latin-ext », chargée seulement si besoin) */
+@font-face { font-family: 'Chakra Petch'; font-weight: 400; font-display: swap; src: url(../fonts/chakra-petch-latin-ext-400-normal.woff2) format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Chakra Petch'; font-weight: 600; font-display: swap; src: url(../fonts/chakra-petch-latin-ext-600-normal.woff2) format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Chakra Petch'; font-weight: 700; font-display: swap; src: url(../fonts/chakra-petch-latin-ext-700-normal.woff2) format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ---------- 2. Les couleurs du jeu ---------- */
+:root {
+  --soot: #120d0b;          /* fond (la suie de la forge) */
+  --plate: #1d1612;         /* cartes */
+  --plate-2: #2a201a;       /* cartes, plus clair */
+  --line: #3d2f26;          /* bordures */
+  --steel: #ede4d6;         /* texte principal */
+  --muted: #b9ab98;         /* texte secondaire */
+  --molten: #ffb347;        /* or fondu */
+  --deep: #ff7a1a;          /* orange profond */
+  --ok: #3cff9a;            /* vert « hors ligne » */
+  --violet: #b48cff;        /* Tony */
+  --bleu: #4f9bff;          /* joueur 1, Soirée OSWEL */
+  --danger: #ff5533;
+  --font-titre: 'Bungee', 'Impact', sans-serif;
+  --font-texte: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --rayon: 14px;
+  --large: 1180px;          /* largeur maximale du contenu */
+  color-scheme: dark;
+}
+
+/* ---------- 3. Les bases ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--soot); color: var(--steel);
+  font-family: var(--font-texte); font-size: 17px; line-height: 1.55;
+  overflow-x: hidden;          /* (anciens navigateurs) */
+  overflow-x: clip;            /* la lueur et les braises de l'en-tête ne créent jamais de défilement horizontal */
+}
+html { overflow-x: clip; }
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: var(--molten); }
+a:hover { color: #ffd08a; }
+:focus-visible { outline: 3px solid var(--molten); outline-offset: 3px; border-radius: 6px; }
+code { font-family: ui-monospace, 'Cascadia Code', 'DejaVu Sans Mono', monospace; font-size: 0.92em; background: #0b0807; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+b, strong { color: #fff; }
+.aller-contenu { position: absolute; left: -999px; top: 8px; background: var(--molten); color: #000; padding: 8px 14px; border-radius: 8px; z-index: 100; }
+.aller-contenu:focus { left: 8px; }
+
+/* ---------- 4. Les boutons ---------- */
+.bouton {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-family: var(--font-titre); font-weight: 400; letter-spacing: 0.02em; text-decoration: none; text-align: center;
+  color: #1a0c02; background: linear-gradient(180deg, #ffd27a 0%, var(--molten) 45%, var(--deep) 100%);
+  border: 0; border-radius: 12px; padding: 12px 20px; cursor: pointer;
+  box-shadow: 0 6px 0 #8a3a00, 0 10px 30px rgba(255, 122, 26, 0.35);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.bouton:hover { color: #1a0c02; filter: brightness(1.06); transform: translateY(-1px); }
+.bouton:active { transform: translateY(4px); box-shadow: 0 2px 0 #8a3a00, 0 6px 18px rgba(255, 122, 26, 0.3); }
+.bouton small { font-family: var(--font-texte); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; color: #4a2205; }
+.bouton-grand { font-size: 1.35rem; padding: 16px 28px 14px; min-width: min(100%, 340px); }
+.bouton-petit { font-size: 0.85rem; padding: 8px 14px; box-shadow: 0 4px 0 #8a3a00; }
+.bouton-contour { background: transparent; color: var(--steel); border: 2px solid var(--line); box-shadow: none; font-size: 0.9rem; flex-direction: row; }
+.bouton-contour:hover { color: #fff; border-color: var(--molten); }
+.lien-discret { color: var(--muted); font-weight: 600; text-decoration: none; }
+.lien-discret:hover { color: var(--molten); }
+
+/* ---------- 5. La barre du haut ---------- */
+.barre {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px max(16px, env(safe-area-inset-left));
+  background: rgba(18, 13, 11, 0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(61, 47, 38, 0.7);
+}
+.barre-logo, .pied-logo { font-family: var(--font-titre); text-decoration: none; color: var(--steel); font-size: 1.05rem; white-space: nowrap; }
+.barre-logo b, .pied-logo b { color: var(--molten); font-weight: 400; }
+.barre-nav { display: none; gap: 22px; }
+.barre-nav a { color: var(--muted); text-decoration: none; font-weight: 600; }
+.barre-nav a:hover { color: var(--steel); }
+
+/* ---------- 6. L'en-tête (logo, slogan, bouton, bande-annonce) ---------- */
+/* la zone de l'en-tête prend toute la largeur (pour la lueur), sans jamais déborder */
+.hero-zone { position: relative; isolation: isolate; overflow: hidden; }
+/* la lueur de la forge derrière le logo */
+.hero-zone::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background: radial-gradient(70% 60% at 50% 25%, rgba(140, 50, 10, 0.55), rgba(18, 13, 11, 0) 70%);
+}
+.hero {
+  position: relative;
+  max-width: var(--large); margin: 0 auto; padding: 36px 16px 28px;
+  display: grid; gap: 28px;
+}
+/* les braises qui montent (dégradés animés, très légers) */
+.braises { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.8;
+  background-image:
+    radial-gradient(2px 2px at 10% 80%, #ffcf8a 50%, transparent 51%), radial-gradient(3px 3px at 25% 60%, #ff9a3a 50%, transparent 51%),
+    radial-gradient(2px 2px at 40% 90%, #ffd9a0 50%, transparent 51%), radial-gradient(2px 2px at 55% 70%, #ff8a2b 50%, transparent 51%),
+    radial-gradient(3px 3px at 70% 85%, #ffc070 50%, transparent 51%), radial-gradient(2px 2px at 85% 65%, #ff9a3a 50%, transparent 51%),
+    radial-gradient(2px 2px at 95% 95%, #ffd9a0 50%, transparent 51%), radial-gradient(2px 2px at 5% 40%, #ff8a2b 50%, transparent 51%);
+  background-size: 100% 100%; animation: braises 9s linear infinite; }
+@keyframes braises { from { transform: translateY(0); opacity: 0.9; } to { transform: translateY(-160px); opacity: 0; } }
+
+.sur-titre { margin: 0 0 6px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--molten); }
+.sur-titre.violet { color: var(--violet); }
+.sur-titre.bleu { color: var(--bleu); }
+/* le logo, comme sur l'écran titre du jeu */
+.logo { margin: 0; font-family: var(--font-titre); font-weight: 400; line-height: 0.88; font-size: clamp(3.1rem, 15vw, 6.6rem); display: grid; }
+.logo span:first-child { color: var(--steel); text-shadow: 0 5px 0 #000; }
+.logo span:last-child {
+  background: linear-gradient(180deg, #fff3c4 0%, var(--molten) 40%, var(--deep) 75%, #8a2a00 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255, 122, 26, 0.5));
+}
+.slogan { margin: 14px 0 6px; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.slogan em { font-style: normal; color: var(--molten); }
+.pitch { margin: 0 0 22px; color: var(--muted); max-width: 34em; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
+
+.video { margin: 0; align-self: center; }
+.video video { width: 100%; border-radius: var(--rayon); background: #000; border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 179, 71, 0.08); aspect-ratio: 16 / 9; }
+.video figcaption { margin-top: 8px; color: var(--muted); font-size: 0.85rem; text-align: center; }
+
+.pastilles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.pastilles li { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(29, 22, 18, 0.8); font-weight: 600; font-size: 0.85rem; color: var(--steel); }
+.pastilles li.vert { color: var(--ok); border-color: rgba(60, 255, 154, 0.35); }
+
+/* ---------- 7. Les sections ---------- */
+.section { max-width: var(--large); margin: 0 auto; padding: 56px 16px 8px; }
+.titre { margin: 0 0 8px; font-family: var(--font-titre); font-weight: 400; font-size: clamp(1.8rem, 7vw, 2.8rem); line-height: 1.05; text-align: center; }
+.titre.gauche { text-align: left; }
+.titre::after { content: ''; display: block; width: 90px; height: 4px; margin: 12px auto 0; border-radius: 4px; background: linear-gradient(90deg, var(--molten), var(--deep)); }
+.titre.gauche::after { margin-left: 0; }
+.sous-titre { margin: 0 0 10px; font-family: var(--font-titre); font-weight: 400; font-size: 1.6rem; }
+.intro { margin: 0 auto 28px; max-width: 46em; text-align: center; color: var(--muted); }
+.petit { color: var(--muted); font-size: 0.9rem; text-align: center; }
+.large { width: 100%; border-radius: var(--rayon); border: 1px solid var(--line); }
+.liste { margin: 14px 0 0; padding-left: 1.2em; color: var(--muted); }
+.liste li::marker { color: var(--molten); }
+
+/* ---------- 8. Les cartes de téléchargement ---------- */
+.plateformes { display: grid; gap: 18px; }
+.plateforme {
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  padding: 20px; border-radius: var(--rayon); background: linear-gradient(180deg, var(--plate-2), var(--plate));
+  border: 1px solid var(--line);
+}
+.plateforme header { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.plateforme h3 { margin: 0; font-family: var(--font-titre); font-weight: 400; font-size: 1.5rem; }
+.plateforme header p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+.icone { width: 46px; height: 46px; flex: none; fill: none; stroke: var(--molten); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  padding: 9px; border-radius: 12px; background: rgba(255, 179, 71, 0.08); border: 1px solid rgba(255, 179, 71, 0.25); }
+/* la carte de l'appareil du visiteur */
+.plateforme.vous { border-color: var(--molten); box-shadow: 0 0 0 1px var(--molten), 0 12px 40px rgba(255, 122, 26, 0.18); }
+.ici { position: absolute; top: -11px; right: 16px; padding: 2px 10px; border-radius: 999px; background: var(--molten); color: #1a0c02; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.dl {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 14px; border-radius: 10px; text-decoration: none;
+  color: var(--steel); background: #120d0b; border: 1px solid var(--line);
+  transition: border-color .12s, transform .12s, background .12s;
+}
+.dl:hover { color: #fff; border-color: var(--molten); transform: translateY(-1px); }
+.dl::before { content: '↓'; font-weight: 700; color: var(--molten); order: 2; font-size: 1.2rem; }
+.dl-nom { font-weight: 700; display: flex; flex-direction: column; line-height: 1.25; }
+.dl-nom i { font-style: normal; font-weight: 600; font-size: 0.8rem; color: var(--muted); }
+.dl-info { margin-left: auto; color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+.dl-principal { background: linear-gradient(180deg, #ffd27a 0%, var(--molten) 45%, var(--deep) 100%); color: #1a0c02; border-color: transparent; box-shadow: 0 4px 0 #8a3a00; }
+.dl-principal:hover { color: #1a0c02; border-color: transparent; filter: brightness(1.05); }
+.dl-principal::before { color: #1a0c02; }
+.dl-principal .dl-nom i, .dl-principal .dl-info { color: #4a2205; }
+
+details.comment { margin-top: 4px; }
+details summary { cursor: pointer; font-weight: 700; color: var(--molten); list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: '+'; display: inline-block; width: 1.1em; font-weight: 700; transition: transform .15s; }
+details[open] summary::before { content: '–'; }
+details.comment ol { margin: 10px 0 0; padding-left: 1.2em; color: var(--muted); font-size: 0.93rem; }
+details.comment li { margin-bottom: 6px; }
+details.comment > p { color: var(--muted); font-size: 0.93rem; margin: 10px 0 4px; }
+.cmd-titre { margin: 10px 0 4px !important; font-weight: 700; color: var(--steel) !important; font-size: 0.85rem !important; }
+.cmd { display: flex; align-items: stretch; gap: 6px; }
+.cmd code { flex: 1; display: block; padding: 8px 10px; overflow-x: auto; white-space: nowrap; color: #d8ffe9; }
+.copier { flex: none; font: 700 0.8rem var(--font-texte); color: var(--steel); background: var(--plate-2); border: 1px solid var(--line); border-radius: 6px; padding: 0 10px; cursor: pointer; }
+.copier:hover { border-color: var(--molten); }
+.copier.ok { color: var(--ok); border-color: var(--ok); }
+
+.reseau { margin-top: 22px; display: grid; gap: 18px; align-items: center; padding: 20px; border-radius: var(--rayon); border: 1px solid rgba(79, 155, 255, 0.35); background: linear-gradient(135deg, rgba(79, 155, 255, 0.1), rgba(29, 22, 18, 0.6)); }
+.reseau h3 { margin: 0 0 6px; font-family: var(--font-titre); font-weight: 400; font-size: 1.3rem; }
+.reseau p { margin: 0; color: var(--muted); }
+.reseau img { border-radius: 10px; border: 1px solid var(--line); }
+
+/* ---------- 9. Les mondes ---------- */
+.mondes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.monde { --c: var(--molten); margin: 0; border-radius: var(--rayon); overflow: hidden; background: var(--plate); border: 1px solid var(--line); border-top: 4px solid var(--c); }
+.monde img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.monde > div { padding: 12px 14px 16px; }
+.monde .num { font-family: var(--font-titre); color: var(--c); font-size: 0.95rem; }
+.monde h3 { margin: 2px 0 4px; font-family: var(--font-titre); font-weight: 400; font-size: 1.25rem; }
+.monde p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.monde p i { color: var(--steel); }
+.m1 { --c: #ff8a2b; } .m2 { --c: #4f9bff; } .m3 { --c: #3cff9a; } .m4 { --c: #c27bff; } .m5 { --c: #ffd23f; }
+
+.bloc-texte-image { margin-top: 40px; display: grid; gap: 22px; align-items: center; }
+.bloc-texte-image > img { border-radius: var(--rayon); border: 1px solid var(--line); box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5); }
+.bloc-texte-image p { color: var(--muted); }
+
+/* ---------- 10. Les boss ---------- */
+.boss { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.boss figure { margin: 0; position: relative; border-radius: var(--rayon); overflow: hidden; border: 1px solid var(--line); background: var(--plate); }
+.boss img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; }
+.boss figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; font-family: var(--font-titre); font-size: 1.05rem; line-height: 1.1;
+  background: linear-gradient(180deg, transparent, rgba(10, 4, 2, 0.92)); }
+.boss figcaption small { display: block; font-family: var(--font-texte); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--danger); }
+
+/* ---------- 11. Tony ---------- */
+.tony .titre::after { background: linear-gradient(90deg, var(--violet), #6c4ad0); }
+.citation { font-size: 1.35rem; font-weight: 700; color: #bff6ff; margin: 6px 0 12px; }
+.pouvoirs { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.pouvoirs li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; padding: 10px 12px; border-radius: 10px; background: rgba(180, 140, 255, 0.08); border: 1px solid rgba(180, 140, 255, 0.28); color: var(--muted); }
+.pouvoirs b { flex: 0 0 9.6em; font-family: var(--font-titre); font-weight: 400; color: #fff; }
+
+/* ---------- 12. Personnages, Soirée OSWEL, atouts ---------- */
+.noms, .mini-jeux { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.noms li { font-family: var(--font-titre); font-size: 0.9rem; padding: 6px 12px; border-radius: 8px; background: var(--plate-2); border: 1px solid var(--line); }
+.noms li:first-child { color: var(--molten); border-color: var(--molten); }
+.mini-jeux { justify-content: flex-start; }
+.mini-jeux li { font-weight: 700; font-size: 0.88rem; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(79, 155, 255, 0.4); background: rgba(79, 155, 255, 0.08); }
+.mini-jeux li:nth-child(4n+2) { border-color: rgba(232, 71, 58, 0.45); background: rgba(232, 71, 58, 0.08); }
+.mini-jeux li:nth-child(4n+3) { border-color: rgba(52, 194, 107, 0.45); background: rgba(52, 194, 107, 0.08); }
+.mini-jeux li:nth-child(4n+4) { border-color: rgba(242, 194, 48, 0.45); background: rgba(242, 194, 48, 0.08); }
+.modes { margin-top: 16px; }
+.atouts { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.atouts li { padding: 16px; border-radius: var(--rayon); background: var(--plate); border: 1px solid var(--line); color: var(--muted); }
+.atouts b { display: block; font-family: var(--font-titre); font-weight: 400; font-size: 1.6rem; color: var(--molten); }
+
+/* ---------- 13. La galerie et la visionneuse ---------- */
+.galerie { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+.vignette { padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; cursor: zoom-in; background: #000; }
+.vignette img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; transition: transform .25s ease; }
+.vignette:hover img { transform: scale(1.04); }
+dialog#visionneuse { padding: 0; border: 0; background: transparent; max-width: min(96vw, 1400px); width: 100%; color: var(--steel); overflow: visible; }
+dialog#visionneuse::backdrop { background: rgba(6, 4, 3, 0.92); }
+dialog#visionneuse img { width: 100%; border-radius: 10px; }
+dialog#visionneuse .legende { text-align: center; color: var(--muted); margin: 10px 0 0; }
+.v-fermer, .v-prec, .v-suiv { position: absolute; border: 0; cursor: pointer; color: #fff; background: rgba(29, 22, 18, 0.85); border: 1px solid var(--line); border-radius: 999px; width: 44px; height: 44px; font-size: 1.4rem; line-height: 1; }
+.v-fermer { top: -54px; right: 0; }
+.v-prec { left: 8px; top: calc(50% - 40px); }
+.v-suiv { right: 8px; top: calc(50% - 40px); }
+
+/* ---------- 14. Questions ---------- */
+.faq { display: grid; gap: 10px; max-width: 820px; margin: 0 auto; }
+.faq details { padding: 14px 16px; border-radius: 12px; background: var(--plate); border: 1px solid var(--line); }
+.faq summary { color: var(--steel); }
+.faq details[open] summary { color: var(--molten); }
+.faq p { margin: 10px 0 0; color: var(--muted); }
+
+/* ---------- 15. Le pied de page ---------- */
+.pied { margin-top: 70px; padding: 40px 16px 50px; text-align: center; border-top: 1px solid var(--line); background: linear-gradient(180deg, transparent, rgba(140, 50, 10, 0.18)); }
+.pied-logo { font-size: 1.8rem; }
+.pied p { margin: 10px 0; color: var(--muted); }
+.partage { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* ---------- 16. Écrans plus larges ---------- */
+@media (min-width: 640px) {
+  .galerie { grid-template-columns: repeat(3, 1fr); }
+  .reseau { grid-template-columns: 1.2fr 1fr; }
+}
+@media (min-width: 900px) {
+  .barre { padding-left: 28px; padding-right: 28px; }
+  .barre-nav { display: flex; }
+  .plateformes { grid-template-columns: repeat(3, 1fr); align-items: start; }
+  .bloc-texte-image { grid-template-columns: 1fr 1.15fr; gap: 40px; }
+  .bloc-texte-image.inverse > img { order: -1; }
+}
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 1.15fr; padding-top: 64px; padding-bottom: 40px; column-gap: 48px; }
+  .pastilles { grid-column: 1 / -1; }
+}
+
+/* ---------- 17. Moins d'animations si le visiteur le demande ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .braises { animation: none; }
+  .bouton, .dl, .vignette img { transition: none; }
+}
+
+/* ---------- 18. La page 404 ---------- */
+.page-404 { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.page-404 .logo { text-align: center; }
+
+/* ---------- 19. La carte « navigateur » (iPhone, iPad, Mac : le jeu complet dans le navigateur) ---------- */
+.plateforme-web { grid-column: 1 / -1; border-color: rgba(60, 255, 154, 0.35); background: linear-gradient(135deg, rgba(60, 255, 154, 0.07), var(--plate) 55%); }
+.plateforme-web .icone { stroke: var(--ok); background: rgba(60, 255, 154, 0.08); border-color: rgba(60, 255, 154, 0.3); }
+.plateforme-web.vous { border-color: var(--molten); }
+.web-intro { margin: 4px 0 6px; color: var(--muted); }
+.web-action { display: flex; flex-direction: column; justify-content: center; }
+.dl-jouer::before { content: '▶'; font-size: 0.95rem; }
+.nav-jouer { color: var(--ok) !important; }
+@media (min-width: 900px) {
+  .plateforme-web { display: grid; grid-template-columns: 1fr minmax(280px, 340px); gap: 10px 32px; align-items: center; }
+}
+/* la carte de l'appareil du visiteur passe en premier (ex. sur iPhone : « iPhone, iPad, Mac ») */
+.plateformes .plateforme.vous { order: -1; }

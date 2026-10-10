@@ -13,7 +13,7 @@ const path = require('path');
 const SOURCE = path.resolve(__dirname, '..');
 const DEST = path.resolve(__dirname, process.argv[2] || 'jeu');
 // ce qui ne fait PAS partie du jeu
-const EXCLURE = new Set(['bureau', 'mobile', 'tools', 'serveur', 'node_modules', '.github', '.git', 'dist', 'CLAUDE.md']);
+const EXCLURE = new Set(['bureau', 'mobile', 'tools', 'serveur', 'site', 'netlify.toml', 'node_modules', '.github', '.git', 'dist', 'CLAUDE.md']);
 const EXT_EXCLUES = ['.zip', '.py', '.log', '.map'];
 
 function copier(src, dst) {

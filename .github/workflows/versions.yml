@@ -16,6 +16,8 @@ on:
   push:
     branches: [main, master]
     tags: ['v*']
+    # (un changement qui ne touche QUE le site web ne refabrique pas le jeu)
+    paths-ignore: ['site/**', 'netlify.toml']
   workflow_dispatch:
 
 permissions:
