@@ -5,9 +5,10 @@
 #   - l'application Android (.apk)            → job « android »
 #   - l'installeur Windows (.exe) + le .zip    → job « pc » (windows)
 #   - Linux : AppImage, paquet pacman (CachyOS / Arch) et .deb → job « pc » (linux)
-# Les fichiers se téléchargent en bas de la page du « run » (Artifacts).
-# Avec une étiquette de version (ex. git tag v1.5.0 && git push --tags),
-# ils sont aussi publiés dans une « Release ».
+# Quand tout est fabriqué, le job « publier » met les fichiers dans une
+# « Release » (onglet Releases du dépôt : un fichier par appareil). Son nom
+# vient de la version de bureau/package.json (ex. v1.5.0) : pour une nouvelle
+# version, change ce numéro avant d'envoyer. Une étiquette v… marche aussi.
 # =====================================================================
 name: Fabriquer les versions
 
@@ -44,9 +45,6 @@ jobs:
           cp app/build/outputs/apk/debug/app-debug.apk ../../sortie/Oswels-Trap-1.5.0-android.apk
       - uses: actions/upload-artifact@v4
         with: { name: oswels-trap-android, path: sortie/*.apk }
-      - if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with: { files: sortie/*.apk }
 
   pc:
     strategy:
@@ -79,12 +77,30 @@ jobs:
             bureau/dist/*.AppImage
             bureau/dist/*.pacman
             bureau/dist/*.deb
-      - if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
+
+  # Une seule « Release » (la page de téléchargement), créée quand tout est fabriqué :
+  # à chaque envoi sur main (version lue dans bureau/package.json, ex. v1.5.0) ou avec une étiquette v…
+  publier:
+    needs: [android, pc]
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Numéro de version
+        id: v
+        run: echo "tag=v$(node -p "require('./bureau/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@v4
+        with: { path: sortie, merge-multiple: true }
+      - run: ls -la sortie
+      - uses: softprops/action-gh-release@v2
         with:
-          files: |
-            bureau/dist/*.exe
-            bureau/dist/*.zip
-            bureau/dist/*.AppImage
-            bureau/dist/*.pacman
-            bureau/dist/*.deb
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || steps.v.outputs.tag }}
+          name: Oswel's Trap ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || steps.v.outputs.tag }}
+          body: |
+            Oswel's Trap — un fichier par appareil :
+            - **Windows** : `…windows-installation.exe` (installeur) ou `…windows-x64.zip` (sans installation)
+            - **CachyOS / Arch** : `…linux-x64.pacman` → `sudo pacman -U Oswels-Trap-…-linux-x64.pacman`
+            - **Autres Linux** : `…AppImage` (rendre exécutable puis double-clic) ou `…amd64.deb`
+            - **Android** : `…android.apk` (autoriser « Installer des applications inconnues »)
+            Tout fonctionne hors ligne.
+          files: sortie/*
